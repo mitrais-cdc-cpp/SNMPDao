@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
-project(MongoDao VERSION 0.1 LANGUAGES CXX)
+project(SNMPDao VERSION 0.1 LANGUAGES CXX)
 
 set(_ECLIPSE_VERSION "4.5")
 

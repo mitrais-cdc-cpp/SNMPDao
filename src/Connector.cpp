@@ -5,7 +5,6 @@
  *      Author: suhendra-ep
  */
 
-#include <iostream>
 #include "../inc/Connector.hpp"
 
 namespace DB
@@ -28,8 +27,8 @@ namespace DB
 	* Simple method to print the text
 	* TODO Suhendra: Rename or change for the real implementation
 	*/
-	void Connector::MakeConnection()
+	std::string Connector::Connection()
 	{
-		std::cout << "Test Connection" << std::endl;
+		return "Test Connection";
 	}
 }

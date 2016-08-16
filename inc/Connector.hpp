@@ -8,6 +8,8 @@
 #ifndef INC_CONNECTOR_H_
 #define INC_CONNECTOR_H_
 
+#include <string>
+#include <iostream>
 namespace DB
 {
 	/**
@@ -31,7 +33,7 @@ namespace DB
 			 * Simple method to print the text
 			 * TODO Suhendra: Rename or change for the real implementation
 			 */
-			void MakeConnection();
+			std::string Connection();
 		private:
 	};
 }
