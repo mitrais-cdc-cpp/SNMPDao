@@ -4,7 +4,7 @@
 #include <string>
 #include <cstddef>
 
-//#include <odb/core.hxx>
+#include <odb/core.hxx>
 
 #pragma db object
 

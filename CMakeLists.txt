@@ -3,6 +3,24 @@ project(SNMPDao VERSION 0.1 LANGUAGES CXX)
 
 set(_ECLIPSE_VERSION "4.5")
 
+# Include odb cmake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
+
+find_package(ODB REQUIRED COMPONENTS mysql)
+include(${ODB_USE_FILE})
+
+set(SNMPDao_SOURCES
+	src/Connector.cpp)
+
+set(SNMPDao_ODB_HEADERS
+	inc/entity/MonitorHistory.hpp
+	inc/entity/NetworkElement.hpp
+	inc/entity/NetworkElemetsToSNMPValues.hpp
+	inc/entity/SNMPValues.hpp)
+
+odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql GENERATE_QUERY GENERATE_SESSION)
+
+
 ###############################################################################
 ## file globbing ##############################################################
 ###############################################################################
