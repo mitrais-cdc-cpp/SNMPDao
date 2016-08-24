@@ -46,7 +46,7 @@ namespace Entity
 			}
 
 		private:
-			//friend class odb::access;
+			friend class odb::access;
 			NetworkElement ()
 			{
 

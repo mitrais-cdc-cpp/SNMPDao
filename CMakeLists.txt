@@ -13,12 +13,15 @@ set(SNMPDao_SOURCES
 	src/Connector.cpp)
 
 set(SNMPDao_ODB_HEADERS
-	inc/entity/MonitorHistory.hpp
-	inc/entity/NetworkElement.hpp
-	inc/entity/NetworkElemetsToSNMPValues.hpp
-	inc/entity/SNMPValues.hpp)
+	inc/Entity/MonitorHistory.hpp
+	inc/Entity/NetworkElement.hpp
+	inc/Entity/NetworkElemetsToSNMPValues.hpp
+	inc/Entity/SNMPValues.hpp)
+
+#include_directories(inc) 
 
 odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql GENERATE_QUERY GENERATE_SESSION)
+
 
 
 ###############################################################################
@@ -39,11 +42,24 @@ include_directories(inc)
 ## target definitions #########################################################
 ###############################################################################
 
+add_library(SNMPDao
+	${SNMPDao_SOURCES}
+	${SNMPDao_ODB_HEADERS})
+target_link_libraries(SNMPDao
+	${ODB_LIBRARIES})
+target_include_directories(SNMPDao
+	PRIVATE
+		${ODB_INCLUDE_DIRS}
+		${ODB_COMPILE_OUTPUT_DIR})
+target_compile_definitions(SNMPDao
+	PRIVATE
+		DATABASE_MYSQL)
+
 #Generate the shared library from the sources
-add_library(SNMPDao SHARED ${SOURCES})
+##add_library(SNMPDao SHARED ${SOURCES})
 
 #Set Debug or Release
-set(CMAKE_BUILD_TYPE Debug)
+##set(CMAKE_BUILD_TYPE Debug)
 
 # just for example add some compiler flags
 #target_compile_options(SNMPDao PUBLIC -Wextra)
@@ -53,8 +69,8 @@ set(CMAKE_BUILD_TYPE Debug)
 ###############################################################################
 
 #enable c++11 and set it required
-set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 11)
-set_property(TARGET SNMPDao PROPERTY CXX_STANDARD_REQUIRED ON)
+##set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 11)
+##set_property(TARGET SNMPDao PROPERTY CXX_STANDARD_REQUIRED ON)
 
 
 ###############################################################################
@@ -72,13 +88,13 @@ add_custom_target (doc ALL
 ###############################################################################
 
 # THREADS
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
+##set(THREADS_PREFER_PTHREAD_FLAG ON)
+##find_package(Threads REQUIRED)
 
 
-include_directories()
-link_directories()
-target_link_libraries(SNMPDao Threads::Threads)
+##include_directories()
+##link_directories()
+##target_link_libraries(SNMPDao Threads::Threads)
 
 ####################
 ##  Installation  ##
