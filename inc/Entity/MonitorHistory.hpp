@@ -18,9 +18,9 @@ namespace Entity
 	class MonitorHistory
 	{
 		public:
-			MonitorHistory(const std::string& timeStamp,
+			MonitorHistory(const boost::posix_time::ptime& lastUpdate,
 					const std::string note, const unsigned long snmpObjectValueId):
-						lastUdpate_(lastUdpate),
+						lastUpdate_(lastUpdate),
 						note_(note),
 						snmpObjectValueId_(snmpObjectValueId)
 			{
@@ -30,7 +30,7 @@ namespace Entity
 			const boost::posix_time::ptime&
 			LastUdpate_() const
 			{
-				return lastUdpate_;
+				return lastUpdate_;
 			}
 
 			const std::string&
@@ -55,7 +55,7 @@ namespace Entity
 			unsigned long monitorHistoryId_;
 
 			#pragma db type("DATETIME(6)")     // Microsecond precision.
-			boost::posix_time::ptime lastUdpate_;
+			boost::posix_time::ptime lastUpdate_;
 
 			#pragma db type("VARCHAR(45)")
 			std::string note_;
