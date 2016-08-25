@@ -9,6 +9,12 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 find_package(ODB REQUIRED COMPONENTS mysql)
 include(${ODB_USE_FILE})
 
+###############################################################################
+## file globbing ##############################################################
+###############################################################################
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/Entity)
+message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}/inc")
 set(SNMPDao_SOURCES
 	src/Connector.cpp)
 
@@ -18,35 +24,26 @@ set(SNMPDao_ODB_HEADERS
 	inc/Entity/NetworkElemetsToSNMPValues.hpp
 	inc/Entity/SNMPValues.hpp)
 
-#include_directories(inc) 
 
+# Compile the entity to ODB generated file
 odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql GENERATE_QUERY GENERATE_SESSION)
 
-
-
-###############################################################################
-## file globbing ##############################################################
-###############################################################################
-
-file(GLOB SOURCES
- 	src/*.cpp)
- 
-message("Following sources found:")
-foreach(a ${SOURCES})
-  message("${a}")
-endforeach()
-
-include_directories(inc)  
 
 ###############################################################################
 ## target definitions #########################################################
 ###############################################################################
 
-add_library(SNMPDao
+#Set Debug or Release
+set(CMAKE_BUILD_TYPE Debug)
+
+#Generate the shared library from the sources
+add_library(SNMPDao SHARED
 	${SNMPDao_SOURCES}
 	${SNMPDao_ODB_HEADERS})
+
 target_link_libraries(SNMPDao
 	${ODB_LIBRARIES})
+
 target_include_directories(SNMPDao
 	PRIVATE
 		${ODB_INCLUDE_DIRS}
@@ -55,22 +52,14 @@ target_compile_definitions(SNMPDao
 	PRIVATE
 		DATABASE_MYSQL)
 
-#Generate the shared library from the sources
-##add_library(SNMPDao SHARED ${SOURCES})
-
-#Set Debug or Release
-##set(CMAKE_BUILD_TYPE Debug)
-
-# just for example add some compiler flags
-#target_compile_options(SNMPDao PUBLIC -Wextra)
 
 ###############################################################################
 ## compiler definitions########################################################
 ###############################################################################
 
 #enable c++11 and set it required
-##set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 11)
-##set_property(TARGET SNMPDao PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 11)
+set_property(TARGET SNMPDao PROPERTY CXX_STANDARD_REQUIRED ON)
 
 
 ###############################################################################
@@ -87,14 +76,6 @@ add_custom_target (doc ALL
 ## dependencies ###############################################################
 ###############################################################################
 
-# THREADS
-##set(THREADS_PREFER_PTHREAD_FLAG ON)
-##find_package(Threads REQUIRED)
-
-
-##include_directories()
-##link_directories()
-##target_link_libraries(SNMPDao Threads::Threads)
 
 ####################
 ##  Installation  ##
