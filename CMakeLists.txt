@@ -6,7 +6,7 @@ set(_ECLIPSE_VERSION "4.5")
 # Include odb cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
-find_package(ODB REQUIRED COMPONENTS mysql)
+find_package(ODB REQUIRED COMPONENTS boost mysql)
 include(${ODB_USE_FILE})
 
 ###############################################################################
@@ -19,10 +19,12 @@ set(SNMPDao_SOURCES
 	src/Connector.cpp)
 
 set(SNMPDao_ODB_HEADERS
+	inc/Entity/ItemizedObject.hpp
 	inc/Entity/MonitorHistory.hpp
 	inc/Entity/NetworkElement.hpp
-	inc/Entity/NetworkElemetsToSNMPValues.hpp
-	inc/Entity/SNMPValues.hpp)
+	inc/Entity/ObjectSnmp.hpp
+	inc/Entity/SnmpObjectType.hpp
+	inc/Entity/SnmpObjectValue.hpp)
 
 
 # Compile the entity to ODB generated file
