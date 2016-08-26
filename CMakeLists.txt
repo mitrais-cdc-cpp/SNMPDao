@@ -14,10 +14,17 @@ include(${ODB_USE_FILE})
 ###############################################################################
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/Entity)
-message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}/inc")
 set(SNMPDao_SOURCES
 	src/Connector.cpp)
 
+set(SNMPDao_ODB_SOURCES
+	inc/odb_gen/ItemizedObject_odb.cpp
+	inc/odb_gen/MonitorHistory_odb.cpp
+	inc/odb_gen/NetworkElement_odb.cpp
+	inc/odb_gen/ObjectSnmp_odb.cpp
+	inc/odb_gen/SnmpObjectType_odb.cpp
+	inc/odb_gen/SnmpObjectValue_odb.cpp
+	)
 set(SNMPDao_ODB_HEADERS
 	inc/Entity/ItemizedObject.hpp
 	inc/Entity/MonitorHistory.hpp
@@ -28,7 +35,7 @@ set(SNMPDao_ODB_HEADERS
 
 
 # Compile the entity to ODB generated file
-odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql GENERATE_QUERY GENERATE_SESSION)
+odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql PROFILE boost GENERATE_QUERY GENERATE_SESSION)
 
 
 ###############################################################################
@@ -48,19 +55,21 @@ message(STATUS "Boost Version: ${Boost_VERSION_STRING}")
 #Generate the shared library from the sources
 add_library(SNMPDao SHARED
 	${SNMPDao_SOURCES}
-	${SNMPDao_ODB_HEADERS})
+	${SNMPDao_ODB_SOURCES})
 
 target_link_libraries(SNMPDao
+	${Boost_LIBRARIES}
 	${ODB_LIBRARIES})
 
+message("check libraries:  ${ODB_LIBRARIES}")
 target_include_directories(SNMPDao
 	PRIVATE
+		${Boost_INCLUDE_DIRS}
 		${ODB_INCLUDE_DIRS}
 		${ODB_COMPILE_OUTPUT_DIR})
 target_compile_definitions(SNMPDao
 	PRIVATE
 		DATABASE_MYSQL)
-
 
 ###############################################################################
 ## compiler definitions########################################################
@@ -84,6 +93,7 @@ add_custom_target (doc ALL
 ###############################################################################
 ## dependencies ###############################################################
 ###############################################################################
+
 
 ####################
 ##  Installation  ##

@@ -5,7 +5,7 @@
 #include <cstddef>
 
 #include <odb/core.hxx>
-#include "boost/date_time/posix_time/posix_time_types.hpp"
+#include <boost/date_time/posix_time/ptime.hpp>
 
 #pragma db object
 
@@ -54,7 +54,7 @@ namespace Entity
 			#pragma db id auto
 			unsigned long monitorHistoryId_;
 
-			#pragma db type("DATETIME(6)")     // Microsecond precision.
+			#pragma db type("TIMESTAMP")     // Microsecond precision.
 			boost::posix_time::ptime lastUpdate_;
 
 			#pragma db type("VARCHAR(45)")

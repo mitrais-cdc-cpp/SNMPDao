@@ -59,7 +59,7 @@ namespace Entity
 	};
 
 	#pragma db view object(SnmpObjectType)
-	struct NetworkElement_stat
+	struct SnmpObjectType_stat
 	{
 	  #pragma db column("count(" + SnmpObjectType::snmpObjectTypeId_ + ")")
 	  std::size_t count;
