@@ -36,6 +36,13 @@ odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql GENERATE_QUERY
 #Set Debug or Release
 set(CMAKE_BUILD_TYPE Debug)
 
+# BOOST
+set(Boost_USE_STATIC_LIBS OFF) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME OFF) 
+find_package(Boost 1.61 EXACT COMPONENTS date_time  REQUIRED)
+message(STATUS "Boost Version: ${Boost_VERSION_STRING}")
+
 #Generate the shared library from the sources
 add_library(SNMPDao SHARED
 	${SNMPDao_SOURCES}
@@ -76,7 +83,6 @@ add_custom_target (doc ALL
 ## dependencies ###############################################################
 ###############################################################################
 
-
 ####################
 ##  Installation  ##
 ####################
@@ -84,8 +90,11 @@ add_custom_target (doc ALL
 # Set installation destination folder for .so and .h files.
 # Change the destination folder
 ###############################
-set(INSTALLATION_DIR "/home/developer/git/Nemsta/env/SNMPDao/lib")
-set(HEADER_DIR "/home/developer/git/Nemsta/env/SNMPDao/inc")
+set(INSTALLATION_DIR "SNMPDao/lib")
+set(HEADER_DIR "SNMPDao/inc")
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set (CMAKE_INSTALL_PREFIX "/home/developer/git/Nemsta/env/" CACHE PATH "default install path" FORCE )
+endif()
 
 # Set header location that will be copied
 file(GLOB HEADERS inc/*)

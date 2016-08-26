@@ -6,8 +6,9 @@ Before you compile the project, the destination directory for installation need 
 
 1. create folder 'build' with $mkdir build in project root
 2. switch directory to build with $ cd build
-3. run cmake with $ cmake ..
-4. run make install with $make install
+3. run cmake with $cmake .. (if you want to install this lib on default location), or
+4. run cmake with $cmake .. -DCMAKE_INSTALL_PREFIX=/path/to/custom/location (if you want to install this lib to the custom location)
+5. run make install with $make install
 
 ### How to run the test:
 1. from root directory, go to folder "test" then create "build" folder

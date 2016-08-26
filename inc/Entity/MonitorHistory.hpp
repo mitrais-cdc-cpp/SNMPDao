@@ -5,6 +5,7 @@
 #include <cstddef>
 
 #include <odb/core.hxx>
+#include "boost/date_time/posix_time/posix_time_types.hpp"
 
 #pragma db object
 
@@ -17,24 +18,31 @@ namespace Entity
 	class MonitorHistory
 	{
 		public:
-			MonitorHistory(const std::string& timeStamp,
-					const std::string note):
-						timeStamp_(timeStamp),
-						note_(note)
+			MonitorHistory(const boost::posix_time::ptime& lastUpdate,
+					const std::string note, const unsigned long snmpObjectValueId):
+						lastUpdate_(lastUpdate),
+						note_(note),
+						snmpObjectValueId_(snmpObjectValueId)
 			{
 
 			}
 
-			const std::string&
-			TimeStamp() const
+			const boost::posix_time::ptime&
+			LastUdpate_() const
 			{
-				return timeStamp_;
+				return lastUpdate_;
 			}
 
 			const std::string&
 			Note() const
 			{
 				return note_;
+			}
+
+			const unsigned long&
+			SnmpObjectValueId() const
+			{
+				return snmpObjectValueId_;
 			}
 
 		private:
@@ -44,17 +52,21 @@ namespace Entity
 
 			}
 			#pragma db id auto
-			unsigned long id_;
+			unsigned long monitorHistoryId_;
 
-			std::string timeStamp_;
+			#pragma db type("DATETIME(6)")     // Microsecond precision.
+			boost::posix_time::ptime lastUpdate_;
 
+			#pragma db type("VARCHAR(45)")
 			std::string note_;
+
+			unsigned long snmpObjectValueId_;
 	};
 
 	#pragma db view object(MonitorHistory)
 	struct MonitorHistory_stat
 	{
-	  #pragma db column("count(" + MonitorHistory::id_ + ")")
+	  #pragma db column("count(" + MonitorHistory::monitorHistoryId_ + ")")
 	  std::size_t count;
 	};
 }

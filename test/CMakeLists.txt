@@ -47,6 +47,13 @@ find_library(
 	NO_DEFAULT_PATH  
 )  
 
+# BOOST
+set(Boost_USE_STATIC_LIBS OFF) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME OFF) 
+find_package(Boost 1.61 EXACT COMPONENTS date_time  REQUIRED)
+message(STATUS "Boost Version: ${Boost_VERSION_STRING}")
+
 # CPPUNIT
 find_library(CPPUNIT_LIBRARY_DEBUG NAMES cppunit cppunit_dll cppunitd cppunitd_dll
             	PATHS  
@@ -73,4 +80,4 @@ set( CPPUNIT_LIBRARY debug ${CPPUNIT_LIBRARY_DEBUG} optimized ${CPPUNIT_LIBRARY_
 
 include_directories(${SNMP_DAO_INCLUDE})
 link_directories(${SNMP_DAO_LIBRARY_DIRS} ${CPPUNIT_LIBRARY})
-target_link_libraries(SNMPDao_Test ${SNMP_DAO_LIBRARIES} ${CPPUNIT_LIBRARY} ${CMAKE_DL_LIBS})
+target_link_libraries(SNMPDao_Test ${SNMP_DAO_LIBRARIES} ${CPPUNIT_LIBRARY})

@@ -17,32 +17,41 @@ namespace Entity
 	class NetworkElement
 	{
 		public:
-			NetworkElement(const std::string& ipAddress,
+			NetworkElement(const std::string elementName,
 					const std::string macAddress,
-					const std::string hostName) :
-						ipAddress_(ipAddress),
+					const std::string& ipAddress) :
+						elementName_(elementName),
 						macAddress_(macAddress),
-						hostName_(hostName)
+						ipAddress_(ipAddress)
 			{
 
 			}
 
+			/*
+			 * Element Name
+			 */
 			const std::string&
-			IPAddress() const
+			TypeName() const
 			{
-				return ipAddress_;
+				return elementName_;
 			}
 
+			/*
+			 * MAC Address
+			 */
 			const std::string&
 			MACAddress() const
 			{
 				return macAddress_;
 			}
 
+			/*
+			 * IP Address
+			 */
 			const std::string&
-			HostName() const
+			IPAddress() const
 			{
-				return hostName_;
+				return ipAddress_;
 			}
 
 		private:
@@ -52,19 +61,22 @@ namespace Entity
 
 			}
 			#pragma db id auto
-			unsigned long id_;
+			unsigned long networkElementId_;
 
-			std::string ipAddress_;
+			#pragma db type("VARCHAR(45)")
+			std::string elementName_;
 
+			#pragma db type("VARCHAR(45)")
 			std::string macAddress_;
 
-			std::string hostName_;
+			#pragma db type("VARCHAR(45)")
+			std::string ipAddress_;
 	};
 
 	#pragma db view object(NetworkElement)
 	struct NetworkElement_stat
 	{
-	  #pragma db column("count(" + NetworkElement::id_ + ")")
+	  #pragma db column("count(" + NetworkElement::networkElementId_ + ")")
 	  std::size_t count;
 	};
 }
