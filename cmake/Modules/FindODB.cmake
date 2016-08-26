@@ -34,19 +34,18 @@ function(find_odb_api component)
 	string(TOUPPER "${component}" component_u)
 	set(ODB_${component_u}_FOUND FALSE PARENT_SCOPE)
 
-	pkg_check_modules(PC_ODB_${component} QUIET "libodb-${component}")
+	#pkg_check_modules(PC_ODB_${component} QUIET "libodb-${component}")
 
 	find_path(ODB_${component}_INCLUDE_DIR
 		NAMES odb/${component}/version.hxx
 		HINTS
-			${ODB_LIBODB_INCLUDE_DIRS}
-			${PC_ODB_${component}_INCLUDE_DIRS})
-
+			${CMAKE_CURRENT_SOURCE_DIR}/env/odb-${component}/include)
+	
+	message("from find api ${ODB_${component}_INCLUDE_DIR}")
 	find_library(ODB_${component}_LIBRARY
 		NAMES odb-${component} libodb-${component}
 		HINTS
-			${ODB_LIBRARY_PATH}
-			${PC_ODB_${component}_LIBRARY_DIRS})
+			${CMAKE_CURRENT_SOURCE_DIR}/env/odb-${component}/lib)
 
 	set(ODB_${component_u}_INCLUDE_DIRS ${ODB_${component}_INCLUDE_DIR} CACHE STRING "ODB ${component} include dirs")
 	set(ODB_${component_u}_LIBRARIES ${ODB_${component}_LIBRARY} CACHE STRING "ODB ${component} libraries")
@@ -67,21 +66,21 @@ function(find_odb_api component)
 	endif()
 endfunction()
 
-pkg_check_modules(PC_LIBODB QUIET "libodb")
+#pkg_check_modules(PC_LIBODB QUIET "libodb")
 
-set(ODB_LIBRARY_PATH "" CACHE STRING "Common library search hint for all ODB libs")
+#set(ODB_LIBRARY_PATH "" CACHE STRING "Common library search hint for all ODB libs")
 
 find_path(libodb_INCLUDE_DIR
 	NAMES odb/version.hxx
 	HINTS
-		${PC_LIBODB_INCLUDE_DIRS})
+		${CMAKE_CURRENT_SOURCE_DIR}/env/odb/include)
 
 find_library(libodb_LIBRARY
 	NAMES odb libodb
 	HINTS
-		${ODB_LIBRARY_PATH}
-		${PC_LIBODB_LIBRARY_DIRS})
+		${CMAKE_CURRENT_SOURCE_DIR}/env/odb/lib)
 
+message("print location library ${libodb_LIBRARY}")
 find_program(odb_BIN
 	NAMES odb
 	HINTS
