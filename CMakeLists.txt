@@ -15,7 +15,12 @@ include(${ODB_USE_FILE})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/Entity)
 set(SNMPDao_SOURCES
-	src/Connector.cpp)
+	src/Connector.cpp
+	src/DBConnector.cpp)
+
+set(SNMPDao_HEADERS
+	inc/Connector.hpp
+	inc/DBConnector.hpp)
 
 set(SNMPDao_ODB_SOURCES
 	inc/odb_gen/ItemizedObject_odb.cpp
