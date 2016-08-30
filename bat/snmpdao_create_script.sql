@@ -8,23 +8,20 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema nemstadb
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema nemstadb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `nemstadb` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
-USE `mydb` ;
+USE `nemstadb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`NetworkElement`
+-- Table `nemstadb`.`NetworkElement`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`NetworkElement` ;
-
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`NetworkElement` (
+CREATE TABLE IF NOT EXISTS `nemstadb`.`NetworkElement` (
   `NetworkElementId` INT NOT NULL AUTO_INCREMENT,
   `ElementName` VARCHAR(45) NOT NULL,
   `MacAddress` VARCHAR(45) NOT NULL,
@@ -36,12 +33,9 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`SnmpObject`
+-- Table `nemstadb`.`SnmpObject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`SnmpObject` ;
-
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`SnmpObject` (
+CREATE TABLE IF NOT EXISTS `nemstadb`.`SnmpObject` (
   `SnmpObjectId` INT NOT NULL AUTO_INCREMENT,
   `Mib` VARCHAR(45) NOT NULL,
   `Oid` VARCHAR(45) NOT NULL,
@@ -52,12 +46,9 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`ItemizedObject`
+-- Table `nemstadb`.`ItemizedObject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`ItemizedObject` ;
-
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`ItemizedObject` (
+CREATE TABLE IF NOT EXISTS `nemstadb`.`ItemizedObject` (
   `ItemizedObjectId` INT NOT NULL AUTO_INCREMENT,
   `NetworkElementFk` INT NOT NULL,
   `SnmpObjectFk` INT NOT NULL,
@@ -66,12 +57,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ItemizedObject` (
   INDEX `fk_ItemizedObject_SnmpObject1_idx` (`SnmpObjectFk` ASC),
   CONSTRAINT `fk_ItemizedObject_NetworkElement`
     FOREIGN KEY (`NetworkElementFk`)
-    REFERENCES `mydb`.`NetworkElement` (`NetworkElementId`)
+    REFERENCES `nemstadb`.`NetworkElement` (`NetworkElementId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ItemizedObject_SnmpObject1`
     FOREIGN KEY (`SnmpObjectFk`)
-    REFERENCES `mydb`.`SnmpObject` (`SnmpObjectId`)
+    REFERENCES `nemstadb`.`SnmpObject` (`SnmpObjectId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -79,12 +70,9 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`SnmpObjectValue`
+-- Table `nemstadb`.`SnmpObjectValue`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`SnmpObjectValue` ;
-
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`SnmpObjectValue` (
+CREATE TABLE IF NOT EXISTS `nemstadb`.`SnmpObjectValue` (
   `SnmpObjectValueId` INT NOT NULL AUTO_INCREMENT,
   `Value` VARCHAR(45) NOT NULL,
   `SnmpObjectFk` INT NOT NULL,
@@ -92,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`SnmpObjectValue` (
   INDEX `fk_SnmpObjectValue_SnmpObject1_idx` (`SnmpObjectFk` ASC),
   CONSTRAINT `fk_SnmpObjectValue_SnmpObject1`
     FOREIGN KEY (`SnmpObjectFk`)
-    REFERENCES `mydb`.`SnmpObject` (`SnmpObjectId`)
+    REFERENCES `nemstadb`.`SnmpObject` (`SnmpObjectId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -100,12 +88,9 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`MonitorHistory`
+-- Table `nemstadb`.`MonitorHistory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`MonitorHistory` ;
-
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`MonitorHistory` (
+CREATE TABLE IF NOT EXISTS `nemstadb`.`MonitorHistory` (
   `MonitorHistoryId` INT NOT NULL AUTO_INCREMENT,
   `LastUpdate` DATETIME NOT NULL,
   `Note` VARCHAR(45) NULL,
@@ -114,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MonitorHistory` (
   INDEX `fk_MonitorHistory_SnmpObjectValue1_idx` (`SnmpObjectValueFk` ASC),
   CONSTRAINT `fk_MonitorHistory_SnmpObjectValue1`
     FOREIGN KEY (`SnmpObjectValueFk`)
-    REFERENCES `mydb`.`SnmpObjectValue` (`SnmpObjectValueId`)
+    REFERENCES `nemstadb`.`SnmpObjectValue` (`SnmpObjectValueId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -122,12 +107,9 @@ ENGINE = InnoDB;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`SnmpObjectType`
+-- Table `nemstadb`.`SnmpObjectType`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`SnmpObjectType` ;
-
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`SnmpObjectType` (
+CREATE TABLE IF NOT EXISTS `nemstadb`.`SnmpObjectType` (
   `SnmpObjectTypeId` INT NOT NULL AUTO_INCREMENT,
   `TypeName` VARCHAR(45) NOT NULL,
   `SnmpObjectValueFk` INT NOT NULL,
@@ -135,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`SnmpObjectType` (
   INDEX `fk_SnmpObjectType_SnmpObjectValue1_idx` (`SnmpObjectValueFk` ASC),
   CONSTRAINT `fk_SnmpObjectType_SnmpObjectValue1`
     FOREIGN KEY (`SnmpObjectValueFk`)
-    REFERENCES `mydb`.`SnmpObjectValue` (`SnmpObjectValueId`)
+    REFERENCES `nemstadb`.`SnmpObjectValue` (`SnmpObjectValueId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
