@@ -110,7 +110,7 @@ add_custom_target (doc ALL
 set(INSTALLATION_DIR "SNMPDao/lib")
 set(HEADER_DIR "SNMPDao/inc")
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set (CMAKE_INSTALL_PREFIX "/home/developer/git/Nemsta/env/" CACHE PATH "default install path" FORCE )
+    set (CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/env/" CACHE PATH "default install path" FORCE )
 endif()
 
 # Set header location that will be copied
