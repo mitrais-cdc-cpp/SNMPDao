@@ -15,12 +15,15 @@ void TestMySQLFactory::testCreateMySQLDatabase() {
   const char *dbName = "mydb";
   const char *host = "172.19.12.251";
 
-  std::auto_ptr<DBFactory> dbFactory(
+  std::unique_ptr<DBFactory> dbFactory(
       new MySQLFactory(username, password, dbName, host));
 
   // ACT
-  std::auto_ptr<database> dbConn(dbFactory->createDatabase());
-
+  bool connStatus = false;
+  std::unique_ptr<database> dbConn(dbFactory->createDatabase());
+  if (dbConn) {
+    connStatus = true;
+  }
   // ASSERT
-  CPPUNIT_ASSERT(dbConn.get() != nullptr);
+  CPPUNIT_ASSERT(connStatus == true);
 }

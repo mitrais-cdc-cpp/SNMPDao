@@ -17,7 +17,7 @@ class DBFactory {
  public:
   DBFactory() {}
   virtual ~DBFactory() {}
-  virtual std::auto_ptr<odb::database> createDatabase() = 0;
+  virtual std::unique_ptr<odb::database> createDatabase() = 0;
 };
 }
 #endif /* INC_DBFACTORY_HPP_ */
