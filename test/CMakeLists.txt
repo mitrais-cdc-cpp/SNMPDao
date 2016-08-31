@@ -47,6 +47,39 @@ find_library(
 	NO_DEFAULT_PATH  
 )  
 
+# ODB
+set(ODB_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/../env/odb/lib)  
+set(ODB_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/../env/odb/include)  
+find_library(  
+	ODB_LIBRARIES  
+	NAMES odb libodb
+	PATHS ${CMAKE_CURRENT_LIST_DIR}/../env/odb/lib
+	PATH_SUFFIXES "lib"  
+	NO_DEFAULT_PATH  
+)
+
+# ODB_MYSQL
+set(ODB_MYSQL_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/../env/odb-mysql/lib)  
+set(ODB_MYSQL_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/../env/odb-mysql/include)  
+find_library(  
+	ODB_MYSQL_LIBRARIES  
+	NAMES odb-mysql libodb-mysql
+	PATHS ${CMAKE_CURRENT_LIST_DIR}/../env/odb-mysql/lib
+	PATH_SUFFIXES "lib"  
+	NO_DEFAULT_PATH  
+)
+
+# ODB_BOOST
+set(ODB_BOOST_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/../env/odb-boost/lib)  
+set(ODB_BOOST_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/../env/odb-boost/include)  
+find_library(  
+	ODB_BOOST_LIBRARIES  
+	NAMES odb-boost libodb-boost
+	PATHS ${CMAKE_CURRENT_LIST_DIR}/../env/odb-boost/lib
+	PATH_SUFFIXES "lib"  
+	NO_DEFAULT_PATH  
+)
+
 # BOOST
 set(Boost_USE_STATIC_LIBS OFF) 
 set(Boost_USE_MULTITHREADED ON)  
@@ -78,6 +111,21 @@ endif(CPPUNIT_LIBRARY_DEBUG AND NOT CPPUNIT_LIBRARY_RELEASE)
 set( CPPUNIT_LIBRARY debug ${CPPUNIT_LIBRARY_DEBUG} optimized ${CPPUNIT_LIBRARY_RELEASE} )
 
 
-include_directories(${SNMP_DAO_INCLUDE})
-link_directories(${SNMP_DAO_LIBRARY_DIRS} ${CPPUNIT_LIBRARY})
-target_link_libraries(SNMPDao_Test ${SNMP_DAO_LIBRARIES} ${CPPUNIT_LIBRARY})
+include_directories(${SNMP_DAO_INCLUDE_DIRS}
+					${SNMP_DAO_INCLUDE_DIRS}/Entity
+					${ODB_INCLUDE_DIRS}
+					${ODB_MYSQL_INCLUDE_DIRS}
+					${ODB_BOOST_INCLUDE_DIRS})
+link_directories(${SNMP_DAO_LIBRARY_DIRS}
+				 ${CPPUNIT_LIBRARY}
+				 ${ODB_LIBRARY_DIRS}
+				 ${ODB_MYSQL_LIBRARY_DIRS}
+				 ${ODB_BOOST_LIBRARY_DIRS})
+target_link_libraries(SNMPDao_Test
+					  ${SNMP_DAO_LIBRARIES}
+					  ${ODB_LIBRARIES}
+					  ${ODB_MYSQL_LIBRARIES}
+					  ${ODB_BOOST_LIBRARIES}
+					  ${CPPUNIT_LIBRARY}
+					  ${CMAKE_DL_LIBS})
+					  
