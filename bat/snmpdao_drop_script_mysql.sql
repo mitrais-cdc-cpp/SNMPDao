@@ -3,45 +3,45 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Table `nemstadb`.`NetworkElement`
+-- Table `nemsta`.`NetworkElement`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nemstadb`.`NetworkElement` ;
+DROP TABLE IF EXISTS `nemsta`.`NetworkElement` ;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
 -- Table `nemstadb`.`SnmpObject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nemstadb`.`SnmpObject` ;
+DROP TABLE IF EXISTS `nemsta`.`SnmpObject` ;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `nemstadb`.`ItemizedObject`
+-- Table `nemsta`.`ItemizedObject`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nemstadb`.`ItemizedObject` ;
+DROP TABLE IF EXISTS `nemsta`.`ItemizedObject` ;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `nemstadb`.`SnmpObjectValue`
+-- Table `nemsta`.`SnmpObjectValue`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nemstadb`.`SnmpObjectValue` ;
+DROP TABLE IF EXISTS `nemsta`.`SnmpObjectValue` ;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `nemstadb`.`MonitorHistory`
+-- Table `nemsta`.`MonitorHistory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nemstadb`.`MonitorHistory` ;
+DROP TABLE IF EXISTS `nemsta`.`MonitorHistory` ;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `nemstadb`.`SnmpObjectType`
+-- Table `nemsta`.`SnmpObjectType`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nemstadb`.`SnmpObjectType` ;
+DROP TABLE IF EXISTS `nemsta`.`SnmpObjectType` ;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Schema `nemstadb`
+-- Schema `nemsta`
 -- -----------------------------------------------------
-DROP DATABASE IF EXISTS `nemstadb` ;
+DROP DATABASE IF EXISTS `nemsta` ;
 SHOW WARNINGS;
 
 SET SQL_MODE=@OLD_SQL_MODE;
