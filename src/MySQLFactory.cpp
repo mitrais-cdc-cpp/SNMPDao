@@ -28,8 +28,8 @@ MySQLFactory::~MySQLFactory() {}
 * Function to create database
 * @return database pointer
 */
-std::unique_ptr<odb::database> MySQLFactory::createDatabase() {
-  std::unique_ptr<odb::database> db(
+std::auto_ptr<odb::database> MySQLFactory::createDatabase() {
+  std::auto_ptr<odb::database> db(
       new odb::mysql::database(_username, _password, _dbName, _host));
   return db;
 }

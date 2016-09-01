@@ -53,7 +53,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(Boost_USE_STATIC_LIBS OFF) 
 set(Boost_USE_MULTITHREADED ON)  
 set(Boost_USE_STATIC_RUNTIME OFF) 
-find_package(Boost 1.61 EXACT COMPONENTS date_time  REQUIRED)
+find_package(Boost 1.61 EXACT COMPONENTS system date_time  REQUIRED)
 message(STATUS "Boost Version: ${Boost_VERSION_STRING}")
 
 #Generate the shared library from the sources
@@ -65,7 +65,7 @@ target_link_libraries(SNMPDao
 	${Boost_LIBRARIES}
 	${ODB_LIBRARIES})
 
-message("check libraries:  ${ODB_LIBRARIES}")
+message("check include dirs:  ${ODB_INCLUDE_DIRS}")
 target_include_directories(SNMPDao
 	PRIVATE
 		${Boost_INCLUDE_DIRS}
@@ -74,6 +74,8 @@ target_include_directories(SNMPDao
 target_compile_definitions(SNMPDao
 	PRIVATE
 		DATABASE_MYSQL)
+
+add_definitions("-Wdeprecated-declarations") 
 
 ###############################################################################
 ## compiler definitions########################################################
