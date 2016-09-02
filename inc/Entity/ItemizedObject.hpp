@@ -1,5 +1,5 @@
-#ifndef NEMSTA_INC_ENTITY_SNMPVALUES_HPP_
-#define NEMSTA_INC_ENTITY_SNMPVALUES_HPP_
+#ifndef NEMSTA_INC_ENTITY_ITEMIZEDOBJECT_HPP_
+#define NEMSTA_INC_ENTITY_ITEMIZEDOBJECT_HPP_
 
 #include <string>
 #include <cstddef>
@@ -14,19 +14,19 @@ namespace SNMPDao
 {
 namespace Entity
 {
-	class SnmpObjectValue
+	class ItemizedObject
 	{
 		public:
-			SnmpObjectValue(const std::string value, const unsigned long snmpObjectId) :
-						value_(value), snmpObjectId_(snmpObjectId)
+			ItemizedObject(const unsigned long networkElementId, const unsigned long snmpObjectId) :
+						networkElementId_(networkElementId), snmpObjectId_(snmpObjectId)
 			{
 
 			}
 
-			const std::string&
-			Value() const
+			const unsigned long&
+			NetworkElementId() const
 			{
-				return value_;
+				return networkElementId_;
 			}
 
 			const unsigned long&
@@ -37,27 +37,25 @@ namespace Entity
 
 		private:
 			friend class odb::access;
-			SnmpObjectValue ()
+			ItemizedObject ()
 			{
 
 			}
 			#pragma db id auto
-			unsigned long snmpObjectValueId_;
+			unsigned long ItemizedObjectId_;
 
-			#pragma db type("VARCHAR(45)")
-			std::string value_;
+			unsigned long networkElementId_;
 
-			unsigned long snmpObjectId_;
-	};
+			unsigned long snmpObjectId_;	};
 
-	#pragma db view object(SnmpObjectValue)
-	struct SnmpObjectValue_stat
+	#pragma db view object(ItemizedObject)
+	struct ItemizedObject_stat
 	{
-	  #pragma db column("count(" + SnmpObjectValue::snmpObjectValueId_ + ")")
+	  #pragma db column("count(" + ItemizedObject::ItemizedObjectId_ + ")")
 	  std::size_t count;
 	};
 }
 }
 }
 
-#endif /* NEMSTA_INC_ENTITY_SNMPVALUES_HPP_ */
+#endif /* NEMSTA_INC_ENTITY_ITEMIZEDOBJECT_HPP_ */

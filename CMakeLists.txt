@@ -25,7 +25,7 @@ set(SNMPDao_ODB_SOURCES
 	inc/odb_gen/ItemizedObject_odb.cpp
 	inc/odb_gen/MonitorHistory_odb.cpp
 	inc/odb_gen/NetworkElement_odb.cpp
-	inc/odb_gen/ObjectSnmp_odb.cpp
+	inc/odb_gen/SnmpObject_odb.cpp
 	inc/odb_gen/SnmpObjectType_odb.cpp
 	inc/odb_gen/SnmpObjectValue_odb.cpp
 	)
@@ -33,7 +33,7 @@ set(SNMPDao_ODB_HEADERS
 	inc/Entity/ItemizedObject.hpp
 	inc/Entity/MonitorHistory.hpp
 	inc/Entity/NetworkElement.hpp
-	inc/Entity/ObjectSnmp.hpp
+	inc/Entity/SnmpObject.hpp
 	inc/Entity/SnmpObjectType.hpp
 	inc/Entity/SnmpObjectValue.hpp)
 
