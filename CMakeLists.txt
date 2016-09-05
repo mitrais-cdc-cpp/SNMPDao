@@ -39,7 +39,7 @@ set(SNMPDao_ODB_HEADERS
 
 
 # Compile the entity to ODB generated file
-odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql PROFILE boost GENERATE_QUERY GENERATE_SESSION)
+odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11 PROFILE boost GENERATE_QUERY GENERATE_SESSION)
 
 
 ###############################################################################
@@ -56,6 +56,19 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost 1.61 EXACT COMPONENTS system date_time  REQUIRED)
 message(STATUS "Boost Version: ${Boost_VERSION_STRING}")
 
+
+#MYSQL
+set(MYSQL_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/lib)  
+set(MYSQL_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/include)  
+find_library(  
+	MYSQL_LIBRARIES  
+	NAMES mysqlclient
+	PATHS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/lib
+	PATH_SUFFIXES "lib"  
+	NO_DEFAULT_PATH
+)
+
+message("mysql libraries ${MYSQL_LIBRARY_DIRS}")
 #Generate the shared library from the sources
 add_library(SNMPDao SHARED
 	${SNMPDao_SOURCES}
@@ -63,14 +76,15 @@ add_library(SNMPDao SHARED
 
 target_link_libraries(SNMPDao
 	${Boost_LIBRARIES}
-	${ODB_LIBRARIES})
+	${ODB_LIBRARIES}
+	${MYSQL_LIBRARIES})
 
-message("check include dirs:  ${ODB_INCLUDE_DIRS}")
 target_include_directories(SNMPDao
 	PRIVATE
 		${Boost_INCLUDE_DIRS}
 		${ODB_INCLUDE_DIRS}
-		${ODB_COMPILE_OUTPUT_DIR})
+		${ODB_COMPILE_OUTPUT_DIR}
+		${MYSQL_INCLUDE_DIRS})
 target_compile_definitions(SNMPDao
 	PRIVATE
 		DATABASE_MYSQL)
