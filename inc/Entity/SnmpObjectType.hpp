@@ -2,15 +2,11 @@
 #define NEMSTA_INC_ENTITY_SNMPOBJECTTYPE_HPP_
 
 #include <cstddef>
+#include <memory>
+#include <odb/core.hxx>
 #include <string>
 
-#include <odb/core.hxx>
-
-#pragma db object
-
-namespace Mitrais {
-namespace SNMPDao {
-namespace Entity {
+#pragma db object pointer(std::shared_ptr) session
 class SnmpObjectType {
  public:
   SnmpObjectType(const std::string typeName,
@@ -35,14 +31,5 @@ class SnmpObjectType {
 #pragma db type("VARCHAR(45)")
   std::string typeName_;
 };
-
-#pragma db view object(SnmpObjectType)
-struct SnmpObjectType_stat {
-#pragma db column("count(" + SnmpObjectType::snmpObjectTypeId_ + ")")
-  std::size_t count;
-};
-}
-}
-}
 
 #endif /* NEMSTA_INC_ENTITY_SNMPOBJECTTYPE_HPP_ */
