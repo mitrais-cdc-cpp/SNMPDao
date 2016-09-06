@@ -25,30 +25,32 @@ class SnmpObjectValue {
                   std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectType,
                   std::shared_ptr<monitorHistoryTypeDef> monitorHistory)
       : value_(value),
-        snmpObject_(snmpObject),
-        snmpObjectType_(snmpObjectType),
-        monitorHistory_(monitorHistory) {}
+        snmpObjectFk_(snmpObject),
+        snmpObjectTypeFk_(snmpObjectType),
+        monitorHistoryFk_(monitorHistory) {}
 
   const std::string& value() const { return value_; }
 
   void snmpObject(std::shared_ptr<snmpObjectTypeDef> snmpObject) {
-    snmpObject_ = snmpObject;
+    snmpObjectFk_ = snmpObject;
   }
 
   void snmpObjectType(std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectType) {
-    snmpObjectType_ = snmpObjectType;
+    snmpObjectTypeFk_ = snmpObjectType;
   }
 
   void monitorHistory(std::shared_ptr<monitorHistoryTypeDef> monitorHistory) {
-    monitorHistory_ = monitorHistory;
+    monitorHistoryFk_ = monitorHistory;
   }
 
-  std::shared_ptr<snmpObjectTypeDef> snmpObject() const { return snmpObject_; }
+  std::shared_ptr<snmpObjectTypeDef> snmpObject() const {
+    return snmpObjectFk_;
+  }
   std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectType() const {
-    return snmpObjectType_;
+    return snmpObjectTypeFk_;
   }
   std::shared_ptr<monitorHistoryTypeDef> monitorHistory() const {
-    return monitorHistory_;
+    return monitorHistoryFk_;
   }
 
  private:
@@ -61,13 +63,13 @@ class SnmpObjectValue {
   std::string value_;
 
 #pragma db not_null
-  std::shared_ptr<snmpObjectTypeDef> snmpObject_;
+  std::shared_ptr<snmpObjectTypeDef> snmpObjectFk_;
 
 #pragma db not_null
-  std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectType_;
+  std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectTypeFk_;
 
 #pragma db not_null
-  std::shared_ptr<monitorHistoryTypeDef> monitorHistory_;
+  std::shared_ptr<monitorHistoryTypeDef> monitorHistoryFk_;
 };
 
 #endif /* NEMSTA_INC_ENTITY_SNMPVALUES_HPP_ */
