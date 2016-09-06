@@ -6,7 +6,7 @@ set(_ECLIPSE_VERSION "4.5")
 # Include odb cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
-find_package(ODB REQUIRED COMPONENTS boost mysql)
+find_package(ODB REQUIRED COMPONENTS mysql)
 include(${ODB_USE_FILE})
 
 ###############################################################################
@@ -39,7 +39,7 @@ set(SNMPDao_ODB_HEADERS
 
 
 # Compile the entity to ODB generated file
-odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11 PROFILE boost GENERATE_QUERY GENERATE_SESSION)
+odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11 GENERATE_QUERY GENERATE_SESSION)
 
 
 ###############################################################################
@@ -48,14 +48,6 @@ odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11
 
 #Set Debug or Release
 set(CMAKE_BUILD_TYPE Debug)
-
-# BOOST
-set(Boost_USE_STATIC_LIBS OFF) 
-set(Boost_USE_MULTITHREADED ON)  
-set(Boost_USE_STATIC_RUNTIME OFF) 
-find_package(Boost 1.61 EXACT COMPONENTS system date_time  REQUIRED)
-message(STATUS "Boost Version: ${Boost_VERSION_STRING}")
-
 
 #MYSQL
 set(MYSQL_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/lib)  
@@ -69,27 +61,25 @@ find_library(
 )
 
 message("mysql libraries ${MYSQL_LIBRARY_DIRS}")
+
 #Generate the shared library from the sources
 add_library(SNMPDao SHARED
 	${SNMPDao_SOURCES}
 	${SNMPDao_ODB_SOURCES})
 
 target_link_libraries(SNMPDao
-	${Boost_LIBRARIES}
 	${ODB_LIBRARIES}
 	${MYSQL_LIBRARIES})
 
 target_include_directories(SNMPDao
 	PRIVATE
-		${Boost_INCLUDE_DIRS}
 		${ODB_INCLUDE_DIRS}
 		${ODB_COMPILE_OUTPUT_DIR}
 		${MYSQL_INCLUDE_DIRS})
+
 target_compile_definitions(SNMPDao
 	PRIVATE
 		DATABASE_MYSQL)
-
-add_definitions("-Wdeprecated-declarations") 
 
 ###############################################################################
 ## compiler definitions########################################################

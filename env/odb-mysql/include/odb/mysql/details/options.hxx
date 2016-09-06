@@ -448,7 +448,7 @@ namespace odb
   }
 }
 
-#include <env/odb-mysql/include/odb/mysql/details/options.ixx>
+#include "options.ixx"
 
 // Begin epilogue.
 //
