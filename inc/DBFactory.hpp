@@ -12,10 +12,21 @@
 #include <odb/database.hxx>
 
 namespace DB {
+/**
+ * The base class for database factory
+ */
 class DBFactory {
  public:
+  /**
+   * Default constructor
+   */
   DBFactory() {}
+
+  /**
+   * Default destructor
+   */
   virtual ~DBFactory() {}
+  // interface
   virtual std::auto_ptr<odb::core::database> createDatabase() = 0;
 };
 }
