@@ -1,9 +1,6 @@
 #ifndef NEMSTA_INC_ENTITY_SNMPVALUES_HPP_
 #define NEMSTA_INC_ENTITY_SNMPVALUES_HPP_
 
-//#include <boost/shared_ptr.hpp>
-#include <cstddef>
-#include <memory>
 #include <odb/core.hxx>
 #include <string>
 #include "MonitorHistory.hpp"
@@ -14,48 +11,46 @@ class SnmpObject;
 class SnmpObjectType;
 class MonitorHistory;
 
-#pragma db object pointer(std::shared_ptr) session
+#pragma db object
 class SnmpObjectValue {
  public:
   typedef ::SnmpObject snmpObjectTypeDef;
   typedef ::SnmpObjectType snmpObjectTypeTypeDef;
   typedef ::MonitorHistory monitorHistoryTypeDef;
   SnmpObjectValue(const std::string value,
-                  std::shared_ptr<snmpObjectTypeDef> snmpObject,
-                  std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectType,
-                  std::shared_ptr<monitorHistoryTypeDef> monitorHistory)
+                  std::auto_ptr<snmpObjectTypeDef> snmpObject,
+                  std::auto_ptr<snmpObjectTypeTypeDef> snmpObjectType,
+                  std::auto_ptr<monitorHistoryTypeDef> monitorHistory)
       : value_(value),
         snmpObjectFk_(snmpObject),
         snmpObjectTypeFk_(snmpObjectType),
         monitorHistoryFk_(monitorHistory) {}
 
+  // getter
   const std::string& value() const { return value_; }
-
-  void snmpObject(std::shared_ptr<snmpObjectTypeDef> snmpObject) {
-    snmpObjectFk_ = snmpObject;
-  }
-
-  void snmpObjectType(std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectType) {
-    snmpObjectTypeFk_ = snmpObjectType;
-  }
-
-  void monitorHistory(std::shared_ptr<monitorHistoryTypeDef> monitorHistory) {
-    monitorHistoryFk_ = monitorHistory;
-  }
-
-  std::shared_ptr<snmpObjectTypeDef> snmpObject() const {
-    return snmpObjectFk_;
-  }
-  std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectType() const {
+  std::auto_ptr<snmpObjectTypeDef> snmpObject() { return snmpObjectFk_; }
+  std::auto_ptr<snmpObjectTypeTypeDef> snmpObjectType() {
     return snmpObjectTypeFk_;
   }
-  std::shared_ptr<monitorHistoryTypeDef> monitorHistory() const {
+  std::auto_ptr<monitorHistoryTypeDef> monitorHistory() {
     return monitorHistoryFk_;
+  }
+
+  // setter
+  void snmpObject(std::auto_ptr<snmpObjectTypeDef> snmpObject) {
+    snmpObjectFk_ = snmpObject;
+  }
+  void snmpObjectType(std::auto_ptr<snmpObjectTypeTypeDef> snmpObjectType) {
+    snmpObjectTypeFk_ = snmpObjectType;
+  }
+  void monitorHistory(std::auto_ptr<monitorHistoryTypeDef> monitorHistory) {
+    monitorHistoryFk_ = monitorHistory;
   }
 
  private:
   friend class odb::access;
   SnmpObjectValue() {}
+
 #pragma db id auto
   unsigned long snmpObjectValueId_;
 
@@ -63,13 +58,13 @@ class SnmpObjectValue {
   std::string value_;
 
 #pragma db not_null
-  std::shared_ptr<snmpObjectTypeDef> snmpObjectFk_;
+  std::auto_ptr<snmpObjectTypeDef> snmpObjectFk_;
 
 #pragma db not_null
-  std::shared_ptr<snmpObjectTypeTypeDef> snmpObjectTypeFk_;
+  std::auto_ptr<snmpObjectTypeTypeDef> snmpObjectTypeFk_;
 
 #pragma db not_null
-  std::shared_ptr<monitorHistoryTypeDef> monitorHistoryFk_;
+  std::auto_ptr<monitorHistoryTypeDef> monitorHistoryFk_;
 };
 
 #endif /* NEMSTA_INC_ENTITY_SNMPVALUES_HPP_ */

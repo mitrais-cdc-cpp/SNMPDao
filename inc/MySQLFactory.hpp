@@ -37,7 +37,7 @@ class MySQLFactory : public DBFactory {
    * Function to create database
    * @return database pointer
    */
-  std::unique_ptr<odb::database> createDatabase();
+  std::auto_ptr<odb::database> createDatabase();
 
  private:
   /**

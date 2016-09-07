@@ -1,12 +1,10 @@
 #ifndef NEMSTA_INC_ENTITY_NETWORKELEMENT_HPP_
 #define NEMSTA_INC_ENTITY_NETWORKELEMENT_HPP_
 
-#include <cstddef>
+#include <odb/core.hxx>
 #include <string>
 
-#include <odb/core.hxx>
-
-#pragma db object pointer(std::shared_ptr) session
+#pragma db object
 class NetworkElement {
  public:
   NetworkElement(const std::string elementName, const std::string macAddress,
@@ -15,24 +13,14 @@ class NetworkElement {
         macAddress_(macAddress),
         ipAddress_(ipAddress) {}
 
-  /*
-   * Element Name
-   */
   const std::string& TypeName() const { return elementName_; }
-
-  /*
-   * MAC Address
-   */
   const std::string& MACAddress() const { return macAddress_; }
-
-  /*
-   * IP Address
-   */
   const std::string& IPAddress() const { return ipAddress_; }
 
  private:
   friend class odb::access;
   NetworkElement() {}
+
 #pragma db id auto
   unsigned long networkElementId_;
 

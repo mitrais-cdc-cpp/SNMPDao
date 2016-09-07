@@ -39,7 +39,8 @@ set(SNMPDao_ODB_HEADERS
 
 
 # Compile the entity to ODB generated file
-odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11 GENERATE_QUERY GENERATE_SESSION)
+# STANDARD c++11
+odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql GENERATE_QUERY GENERATE_SESSION)
 
 
 ###############################################################################
@@ -56,8 +57,8 @@ add_library(SNMPDao SHARED ${SNMPDao_SOURCES} ${SNMPDao_ODB_SOURCES})
 ## compiler definitions########################################################
 ###############################################################################
 
-#enable c++11 and set it required
-set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 11)
+#enable c++98 and set it required
+set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 98)
 set_property(TARGET SNMPDao PROPERTY CXX_STANDARD_REQUIRED ON)
 
 #set warning level
@@ -71,8 +72,7 @@ set_property(TARGET SNMPDao APPEND_STRING PROPERTY COMPILE_FLAGS "-Wno-deprecate
 find_package(Doxygen)
 add_custom_target (doc ALL
 	${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/doxy/*.doxyfile
-	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doxy
-)
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doxy)
 
 ###############################################################################
 ## dependencies ###############################################################
@@ -89,13 +89,7 @@ find_library(
 	NO_DEFAULT_PATH)
 
 target_link_libraries(SNMPDao ${ODB_LIBRARIES} ${MYSQL_LIBRARIES})
-
-target_include_directories(SNMPDao
-	PRIVATE
-		${ODB_INCLUDE_DIRS}
-		${ODB_COMPILE_OUTPUT_DIR}
-		${MYSQL_INCLUDE_DIRS})
-
+target_include_directories(SNMPDao PRIVATE ${ODB_INCLUDE_DIRS} ${ODB_COMPILE_OUTPUT_DIR} ${MYSQL_INCLUDE_DIRS})
 target_compile_definitions(SNMPDao PRIVATE DATABASE_MYSQL)
 
 

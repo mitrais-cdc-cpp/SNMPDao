@@ -10,14 +10,13 @@
 
 #include <memory>
 #include <odb/database.hxx>
-using namespace odb::core;
 
 namespace DB {
 class DBFactory {
  public:
   DBFactory() {}
   virtual ~DBFactory() {}
-  virtual std::unique_ptr<odb::database> createDatabase() = 0;
+  virtual std::auto_ptr<odb::core::database> createDatabase() = 0;
 };
 }
 #endif /* INC_DBFACTORY_HPP_ */

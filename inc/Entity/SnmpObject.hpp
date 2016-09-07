@@ -1,39 +1,25 @@
-/*
- * SnmpObject.hpp
- *
- *  Created on: Aug 23, 2016
- *      Author: developer
- */
-
 #ifndef INC_ENTITY_SNMPOBJECT_HPP_
 #define INC_ENTITY_SNMPOBJECT_HPP_
 
-#include <cstddef>
-#include <memory>
+#include <odb/core.hxx>
 #include <string>
 
-#include <odb/core.hxx>
-
-#pragma db object pointer(std::shared_ptr) session
+#pragma db object
 class SnmpObject {
  public:
   SnmpObject(const std::string mib, const std::string oid,
              const std::string objectName)
-      : mib_(mib),
-        oid_(oid),
-        objectName_(objectName)
+      : mib_(mib), oid_(oid), objectName_(objectName) {}
 
-  {}
-
+  // getter
   const std::string& Mib() const { return mib_; }
-
   const std::string& Oid() const { return oid_; }
-
   const std::string& ObjectName() const { return objectName_; }
 
  private:
   friend class odb::access;
   SnmpObject() {}
+
 #pragma db id auto
   unsigned long snmpObjectId_;
 
