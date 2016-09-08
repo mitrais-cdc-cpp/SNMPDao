@@ -1,5 +1,7 @@
 #include "../inc/MySQLFactory.hpp"
 
+#include <odb/mysql/database.hxx>
+
 /**
 Default constructor
 * @param username: Database username
@@ -7,19 +9,14 @@ Default constructor
 * @param dbName: Database name
 * @param host: Database host
 */
-DB::MySQLFactory::MySQLFactory(const char *username, const char *password,
-                               const char *dbName, const char *host)
-    : _username(username), _password(password), _dbName(dbName), _host(host) {}
+DB::MySQLFactory::MySQLFactory(std::string &username_, std::string &password_,
+                               std::string &dbname_, std::string &host_)
+    : username(username_),
+      password(password_),
+      dbname(dbname_),
+      host(host_),
+      DB::DBFactory(std::make_shared<odb::mysql::database>(username_, password_,
+                                                           dbname_, host_)) {}
 
-/** Default destructor
- */
+/// Default destructor
 DB::MySQLFactory::~MySQLFactory() {}
-
-/** Function to create database
- * @return database pointer
- */
-std::auto_ptr<odb::database> DB::MySQLFactory::createDatabase() {
-  std::auto_ptr<odb::database> db(
-      new odb::mysql::database(_username, _password, _dbName, _host));
-  return db;
-}

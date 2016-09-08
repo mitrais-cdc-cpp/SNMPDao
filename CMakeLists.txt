@@ -6,6 +6,7 @@ set(_ECLIPSE_VERSION "4.5")
 # Include odb cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
+#TODO: set ODB path
 find_package(ODB REQUIRED COMPONENTS mysql)
 include(${ODB_USE_FILE})
 
@@ -13,13 +14,12 @@ include(${ODB_USE_FILE})
 ## file globbing ##############################################################
 ###############################################################################
 
+#tell odb where to find included from generated headers
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/Entity)
-set(SNMPDao_SOURCES
-	src/MySQLFactory.cpp)
 
-set(SNMPDao_HEADERS
-	inc/DBFactory.hpp
-	inc/MySQLFactory.hpp)
+set(SNMPDao_SOURCES
+	src/DataAccess.cpp
+	src/MySQLFactory.cpp)
 
 set(SNMPDao_ODB_SOURCES
 	inc/odb_gen/ItemizedObject_odb.cpp
@@ -27,8 +27,8 @@ set(SNMPDao_ODB_SOURCES
 	inc/odb_gen/NetworkElement_odb.cpp
 	inc/odb_gen/SnmpObject_odb.cpp
 	inc/odb_gen/SnmpObjectType_odb.cpp
-	inc/odb_gen/SnmpObjectValue_odb.cpp
-	)
+	inc/odb_gen/SnmpObjectValue_odb.cpp)
+	
 set(SNMPDao_ODB_HEADERS
 	inc/Entity/ItemizedObject.hpp
 	inc/Entity/MonitorHistory.hpp
@@ -39,8 +39,7 @@ set(SNMPDao_ODB_HEADERS
 
 
 # Compile the entity to ODB generated file
-# STANDARD c++11
-odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql GENERATE_QUERY GENERATE_SESSION)
+odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11 GENERATE_QUERY GENERATE_SESSION)
 
 
 ###############################################################################
@@ -57,8 +56,8 @@ add_library(SNMPDao SHARED ${SNMPDao_SOURCES} ${SNMPDao_ODB_SOURCES})
 ## compiler definitions########################################################
 ###############################################################################
 
-#enable c++98 and set it required
-set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 98)
+#enable c++11 and set it required
+set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 11)
 set_property(TARGET SNMPDao PROPERTY CXX_STANDARD_REQUIRED ON)
 
 #set warning level

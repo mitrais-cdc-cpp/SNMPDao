@@ -15,14 +15,20 @@ class MySQLFactory : public DBFactory {
    * Default constructor
    * @param username: Database username
    * @param password: Database password
-   * @param dbname: Database name
+   * @param dbName: Database name
    * @param host: Database host
    */
-  MySQLFactory(std::string &username_, std::string &password_,
-               std::string &dbname_, std::string &host_);
+  MySQLFactory(std::string username_, std::string password_,
+               std::string dbname_, std::string host_);
 
   /// Default dtor
   ~MySQLFactory();
+
+  /**
+   * Function to create database
+   * @return database pointer
+   */
+  std::unique_ptr<odb::database> createDatabase();
 
  private:
   /// Database username

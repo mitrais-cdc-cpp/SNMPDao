@@ -1,14 +1,9 @@
-/*
- * DBFactory.hpp
- *
- *  Created on: Aug 31, 2016
- *      Author: developer
- */
-
 #ifndef INC_DBFACTORY_HPP_
 #define INC_DBFACTORY_HPP_
 
 #include <memory>
+#include "DataAccess.hpp"
+
 #include <odb/database.hxx>
 
 namespace DB {
@@ -17,17 +12,39 @@ namespace DB {
  */
 class DBFactory {
  public:
-  /**
-   * Default constructor
-   */
-  DBFactory() {}
+  /// Default ctor
+  DBFactory() : dao(nullptr) {}
 
-  /**
-   * Default destructor
-   */
+  /// Default dtor
   virtual ~DBFactory() {}
-  // interface
-  virtual std::auto_ptr<odb::core::database> createDatabase() = 0;
+
+  /// public interface
+  bool isInit() { return dao.isInit(); }
+
+  /// TODO: doc
+  bool insertSNMPValue(const int &networkElementId, const std::string &OID,
+                       const std::string &value, const std::string &typeName) {
+    return dao.insertSNMPValue(networkElementId, OID, value, typeName);
+  }
+  /// TODO: doc
+  long insertNetworkElement(const std::string &elementName,
+                            const std::string &macAddress,
+                            const std::string &ipAddress) {
+    return dao.insertNetworkElement(elementName, macAddress, ipAddress);
+  }
+
+  std::shared_ptr<NetworkElement> getNetworkElementById(
+      unsigned long networkElementId) {
+    return dao.getNetWorkElementById(networkElementId);
+  }
+
+ protected:
+  /// derived ctor
+  DBFactory(std::shared_ptr<odb::database> odb_impl) : dao(odb_impl) {}
+
+ private:
+  /// TODO: doc
+  DataAccess dao;
 };
 }
 #endif /* INC_DBFACTORY_HPP_ */
