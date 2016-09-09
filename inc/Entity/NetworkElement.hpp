@@ -14,6 +14,7 @@ class NetworkElement {
         macAddress_(macAddress),
         ipAddress_(ipAddress) {}
 
+  const unsigned long& NetWorkElementId() const { return networkElementId_; }
   const std::string& TypeName() const { return elementName_; }
   const std::string& MACAddress() const { return macAddress_; }
   const std::string& IPAddress() const { return ipAddress_; }

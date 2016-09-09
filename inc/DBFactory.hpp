@@ -38,6 +38,11 @@ class DBFactory {
     return dao.getNetWorkElementByMacAddress(macAddress);
   }
 
+  std::string insertSnmpObject(const std::string &MIB, const std::string &OID,
+                               const std::string &objectName) {
+    return dao.insertSnmpObject(MIB, OID, objectName);
+  }
+
  protected:
   /// derived ctor
   DBFactory(std::shared_ptr<odb::database> odb_impl) : dao(odb_impl) {}

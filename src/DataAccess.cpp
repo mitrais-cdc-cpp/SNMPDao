@@ -128,3 +128,29 @@ long DB::DataAccess::insertSnmpObjectValue(
   long id = _dbConn->persist(*entity);
   return id;
 }
+
+std::string DB::DataAccess::insertSnmpObject(const std::string& MIB,
+                                             const std::string& OID,
+                                             const std::string& objectName) {
+  std::string OIDResult;
+  odb::transaction t(_dbConn->begin());
+  try {
+    std::shared_ptr<SnmpObject> snmpObject(getSnmpObjectByOid(OID));
+    if (snmpObject) {
+      OIDResult = snmpObject->Oid();
+    } else {
+      std::shared_ptr<SnmpObject> newSnmpObject(
+          new SnmpObject(MIB, OID, objectName));
+      _dbConn->persist(*newSnmpObject);
+      OIDResult = OID;
+    }
+
+    t.commit();
+
+    return OIDResult;
+  } catch (const odb::exception& e) {
+    t.rollback();
+    std::cerr << e.what() << std::endl;
+    return 0;
+  }
+}

@@ -66,6 +66,9 @@ class DataAccess {
   std::shared_ptr<NetworkElement> getNetWorkElementByMacAddress(
       const std::string &macAddress);
 
+  std::string insertSnmpObject(const std::string &MIB, const std::string &OID,
+                               const std::string &objectName);
+
  private:
   /// Database connection member
   std::shared_ptr<odb::database> _dbConn;
