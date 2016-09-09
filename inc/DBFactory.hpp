@@ -33,9 +33,9 @@ class DBFactory {
     return dao.insertNetworkElement(elementName, macAddress, ipAddress);
   }
 
-  std::shared_ptr<NetworkElement> getNetworkElementById(
-      unsigned long networkElementId) {
-    return dao.getNetWorkElementById(networkElementId);
+  std::shared_ptr<NetworkElement> getNetWorkElementByMacAddress(
+      const std::string &macAddress) {
+    return dao.getNetWorkElementByMacAddress(macAddress);
   }
 
  protected:

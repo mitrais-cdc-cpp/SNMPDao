@@ -52,19 +52,28 @@ long DB::DataAccess::insertSNMPValue(const int& networkElementId,
   return snmpValueId;
 }
 
-std::shared_ptr<NetworkElement> DB::DataAccess::getNetWorkElementById(
-    unsigned long networkElementId) {
+std::shared_ptr<NetworkElement> DB::DataAccess::getNetWorkElementByMacAddress(
+    const std::string& macAddress) {
   odb::transaction t(_dbConn->begin());
-  std::auto_ptr<NetworkElement> element1;
+
+  // Network element
+  std::shared_ptr<NetworkElement> element;
   try {
-    std::shared_ptr<NetworkElement> element(
-        _dbConn->load<NetworkElement>(networkElementId));
-    t.commit();
-    return element;
+    result_network_element r(_dbConn->query<NetworkElement>(
+        query_network_element::macAddress == macAddress));
+    if (r.size() > 0) {
+      result_network_element::iterator i(r.begin());
+
+      element = std::shared_ptr<NetworkElement>(i.load());
+      t.commit();
+      return element;
+    } else {
+      return element;
+    }
   } catch (const odb::exception& e) {
     t.rollback();
     std::cerr << e.what() << std::endl;
-    return element1;
+    return element;
   }
 }
 

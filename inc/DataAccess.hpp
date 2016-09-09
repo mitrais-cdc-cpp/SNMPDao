@@ -26,6 +26,8 @@ typedef odb::query<SnmpObjectType> query_snmpmobject_type;
 typedef odb::result<SnmpObjectType> result_snmpmobject_type;
 typedef odb::query<SnmpObject> query_snmpmobject;
 typedef odb::result<SnmpObject> result_snmpmobject;
+typedef odb::query<NetworkElement> query_network_element;
+typedef odb::result<NetworkElement> result_network_element;
 
 namespace DB {
 class DataAccess {
@@ -57,12 +59,12 @@ class DataAccess {
                        const std::string &value, const std::string &typeName);
 
   /**
-   * Function to get NetworkElement by id
+   * Function to get NetworkElement by IP Address
    * @param id: NetworkElement id
    * @return pointer to NetworkElement
    */
-  std::shared_ptr<NetworkElement> getNetWorkElementById(
-      unsigned long networkElementId);
+  std::shared_ptr<NetworkElement> getNetWorkElementByMacAddress(
+      const std::string &macAddress);
 
  private:
   /// Database connection member

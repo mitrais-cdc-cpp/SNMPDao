@@ -50,6 +50,7 @@ odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11
 set(CMAKE_BUILD_TYPE Debug)
 
 add_library(SNMPDao SHARED ${SNMPDao_SOURCES} ${SNMPDao_ODB_SOURCES})
+target_compile_definitions(SNMPDao PRIVATE LIBODB_MYSQL_INCLUDE_SHORT=1)
 
 
 ###############################################################################
