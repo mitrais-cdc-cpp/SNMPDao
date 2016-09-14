@@ -118,7 +118,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [nemstadb].[snmpobjectvalue](
 	[SnmpObjectValueId] [int] IDENTITY(1,1) NOT NULL,
-	[Value] [nvarchar](45) NOT NULL,
+	[Value] [nvarchar](300) NOT NULL,
 	[SnmpObjectFk] [int] NOT NULL,
  CONSTRAINT [PK_snmpobjectvalue_SnmpObjectValueId] PRIMARY KEY CLUSTERED 
 (

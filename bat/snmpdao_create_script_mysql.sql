@@ -115,7 +115,7 @@ DROP TABLE IF EXISTS `nemsta`.`SnmpObjectValue` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `nemsta`.`SnmpObjectValue` (
   `SnmpObjectValueId` INT NOT NULL AUTO_INCREMENT,
-  `Value` VARCHAR(45) NOT NULL,
+  `Value` VARCHAR(300) NOT NULL,
   `SnmpObjectFk` INT NOT NULL,
   `MonitorHistoryFk` INT NOT NULL,
   `SnmpObjectTypeFk` INT NOT NULL,

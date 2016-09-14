@@ -46,6 +46,7 @@ long DB::DataAccess::insertSNMPValue(const int& networkElementId,
 
     t.commit();
   } catch (const odb::exception& e) {
+    std::cerr << e.what() << std::endl;
     t.rollback();
   }
 
