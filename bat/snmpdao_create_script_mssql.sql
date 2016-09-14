@@ -1,10 +1,27 @@
 USE [master]
 GO
 
+/* Create a Login 
+ * A Login is an account on the SQL Server as a whole - someone 
+ * who is able to log in to the server and who has a password. 
+ */
+CREATE LOGIN NemstaUser WITH PASSWORD = 'Nemsta123'
+GO
+
 CREATE DATABASE [nemsta]
 GO
 
 USE [nemsta]
+GO
+
+/* Creat a User 
+ * A User is a Login with access to a specific database.
+ */
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'NemstaUser')
+BEGIN
+    CREATE USER NemstaUser FOR LOGIN [NemstaUser]
+    EXEC sp_addrolemember N'db_owner', N'NemstaUser'
+END;
 GO
 
 /* 
