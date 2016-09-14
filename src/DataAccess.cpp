@@ -40,8 +40,10 @@ long DB::DataAccess::insertSNMPValue(const int& networkElementId,
                                         snmpObjectType);
 #ifdef __DEBUG
     std::cout << "Mib SnmpObject : " << snmpObject->Mib() << std::endl;
+    std::cout << "OID SnmpObject : " << snmpObject->Oid() << std::endl;
     std::cout << "Typename : " << snmpObjectType->TypeName() << std::endl;
     std::cout << "SnmpValue Id : " << snmpValueId << std::endl;
+    std::cout << "SnmpValue value : " << value << "\n" << std::endl;
 #endif
 
     t.commit();
