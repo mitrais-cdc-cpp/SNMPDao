@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>280</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>SNMP::MySQLFactory
+--
+username : string
+password : string
+host : string
+dbname : string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>150</y>
+      <w>400</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>SNMP::DBFactory
+--
+dao : DataAccess
+--
++ isInit() : bool
++ insertSNMPValue(const int&amp;, 
+           const string&amp;,
+           const string&amp;,
+           const string&amp;) : bool
++ insertNetworkElement(const string&amp;,
+           const string&amp;,
+           const string&amp;) : long
++ getNetWorkElementByMacAddress(const string&amp;) 
+           : shared_ptr&lt;NetworkElement&gt; 
++ insertSnmpObject(const string&amp;,
+           const string&amp;,
+           const string&amp;) : string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>90</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>400</y>
+      <w>400</w>
+      <h>430</h>
+    </coordinates>
+    <panel_attributes>SNMP::DataAccess
+--
+_dbConn : shared_ptr&lt;odb::database&gt;
+--
+- getSnmpObjectTypeByTypeName(
+      const string&amp;) : shared_ptr&lt;SnmpObjectType&gt;
+- getSnmpObjectByOid(const string&amp;)
+       : shared_ptr&lt;SnmpObject&gt;
+- insertMonitorHistory(const unsigned long long&amp;, 
+       const string &amp;) : shared_ptr&lt;MonitorHistory&gt;
+- insertSnmpObjectValue(const string&amp;,
+       shared_ptr&lt;SnmpObject&gt;,
+       shared_ptr&lt;MonitorHistory&gt;,
+       shared_ptr&lt;SnmpObjectType&gt;) : long 
++ inline isInit() : bool
++ insertNetworkElement(const string&amp;,
+       const string&amp;,
+       const string&amp;) : long
++ insertSNMPValue(const int&amp;, 
+       const string&amp;,
+       const string&amp;, 
+       const string&amp;) : long
++ getNetWorkElementByMacAddress(
+      const string&amp;) : shared_ptr&lt;NetworkElement&gt;
++ insertSnmpObject(const string&amp;, 
+      const string&amp;,
+      const string&amp;) : string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>140</x>
+      <y>350</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>150</y>
+      <w>380</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>SNMP::MicrosoftSQLFactory
+--
+username : string
+password : string
+host : string
+dbname : string
+--
++ createDatabase() : unique_ptr&lt;odb::database&gt; 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>210</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+</diagram>
