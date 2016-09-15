@@ -1,5 +1,5 @@
 SET @OLD_SQL_SAFE_UPDATES=@@SQL_SAFE_UPDATES, SQL_SAFE_UPDATES=0;
-use nemstadb;
+use nemsta;
 start transaction;
 DELETE FROM itemizedobject;
 DELETE FROM monitorhistory;
