@@ -1,6 +1,11 @@
-TRUNCATE `nemstadb`.`snmpobject`;
-TRUNCATE `nemstadb`.`itemizedobject`;
-TRUNCATE `nemstadb`.`monitorhistory`;
-TRUNCATE `nemstadb`.`networkelement`;
-TRUNCATE `nemstadb`.`snmpobjecttype`;
-TRUNCATE `nemstadb`.`snmpobjectvalue`;
+SET @OLD_SQL_SAFE_UPDATES=@@SQL_SAFE_UPDATES, SQL_SAFE_UPDATES=0;
+use nemstadb;
+start transaction;
+DELETE FROM itemizedobject;
+DELETE FROM monitorhistory;
+DELETE FROM networkelement; 
+DELETE FROM snmpobject;
+DELETE FROM snmpobjecttype;
+DELETE FROM snmpobjectvalue;
+rollback;
+SET SQL_SAFE_UPDATES=@OLD_SQL_SAFE_UPDATES;
