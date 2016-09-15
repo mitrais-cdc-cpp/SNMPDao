@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS `nemsta`.`NetworkElement` ;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `nemstadb`.`SnmpObject`
+-- Table `nemsta`.`SnmpObject`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `nemsta`.`SnmpObject` ;
 SHOW WARNINGS;

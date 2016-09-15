@@ -63,7 +63,7 @@ class SnmpObjectValue {
 #pragma db id auto
   unsigned long snmpObjectValueId_;
 /// TODO: doc
-#pragma db type("VARCHAR(45)")
+#pragma db type("VARCHAR(300)")
   std::string value_;
 /// TODO: doc
 #pragma db not_null
