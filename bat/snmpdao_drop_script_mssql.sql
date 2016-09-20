@@ -1,16 +1,6 @@
 USE [nemsta]
 GO
 
-/* Get current session id of NemstaUser Login*/
-SELECT session_id
-FROM sys.dm_exec_sessions
-WHERE login_name = 'NemstaUser'
-GO
-
-/* Drop Login NemstaUser */
-DROP LOGIN [NemstaUser]
-GO
-
 /* Drop Foreign Key Constraints
  * Because we have some foreign keys here, we shoould delete it first before delete the tables,
  * so that will not ruined the database rules 
@@ -53,4 +43,14 @@ GO
 
 /****** Drop Object:  Database [nemsta] ******/
 DROP DATABASE [nemsta]
+GO
+
+/* Get current session id of NemstaUser Login*/
+SELECT session_id
+FROM sys.dm_exec_sessions
+WHERE login_name = 'NemstaUser'
+GO
+
+/* Drop Login NemstaUser */
+DROP LOGIN [NemstaUser]
 GO

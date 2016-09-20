@@ -16,6 +16,7 @@
 #include "odb_gen/SnmpObjectValue_odb.h"
 #include "odb_gen/SnmpObject_odb.h"
 
+#include <ctime>
 #include <iostream>
 #include <memory>
 #include <string>

@@ -103,7 +103,7 @@ CREATE TABLE [nemsta].[snmpobject](
 	[SnmpObjectId] [int] IDENTITY(1,1) NOT NULL,
 	[Mib] [nvarchar](45) NOT NULL,
 	[Oid] [nvarchar](45) NOT NULL,
-	[ObjectName] [nvarchar](45) NULL,
+	[ObjectName] [nvarchar](100) NULL,
  CONSTRAINT [PK_snmpobject_SnmpObjectId] PRIMARY KEY CLUSTERED 
 (
 	[SnmpObjectId] ASC

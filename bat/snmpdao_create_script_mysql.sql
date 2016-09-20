@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `nemsta`.`SnmpObject` (
   `SnmpObjectId` INT NOT NULL AUTO_INCREMENT,
   `Mib` VARCHAR(45) NOT NULL,
   `Oid` VARCHAR(45) NOT NULL,
-  `ObjectName` VARCHAR(45) NULL,
+  `ObjectName` VARCHAR(100) NULL,
   PRIMARY KEY (`SnmpObjectId`))
 ENGINE = InnoDB;
 

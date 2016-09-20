@@ -30,7 +30,7 @@ class SnmpObject {
 #pragma db type("VARCHAR(45)")
   std::string oid_;
 /// TODO: doc
-#pragma db type("VARCHAR(45)")
+#pragma db type("VARCHAR(100)")
   std::string objectName_;
 };
 

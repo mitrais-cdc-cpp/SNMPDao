@@ -33,8 +33,10 @@ long DB::DataAccess::insertSNMPValue(const int& networkElementId,
     std::shared_ptr<SnmpObjectType> snmpObjectType(
         getSnmpObjectTypeByTypeName(typeName));
     std::shared_ptr<SnmpObject> snmpObject(getSnmpObjectByOid(OID));
+
+    std::time_t now = std::time(0);
     std::shared_ptr<MonitorHistory> monitorHistory(
-        insertMonitorHistory(12345, "Test"));
+        insertMonitorHistory(now, "Test History"));
 
     snmpValueId = insertSnmpObjectValue(value, snmpObject, monitorHistory,
                                         snmpObjectType);
