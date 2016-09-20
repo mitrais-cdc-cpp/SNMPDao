@@ -118,12 +118,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [nemsta].[snmpobjecttype](
 	[SnmpObjectTypeId] [int] IDENTITY(1,1) NOT NULL,
-	[TypeName] [nvarchar](45) NOT NULL,
-	[SnmpObjectValueFk] [int] NOT NULL,
+	[TypeName] [nvarchar](45) NOT NULL UNIQUE,
  CONSTRAINT [PK_snmpobjecttype_SnmpObjectTypeId] PRIMARY KEY CLUSTERED 
 (
-	[SnmpObjectTypeId] ASC,
-	[SnmpObjectValueFk] ASC
+	[SnmpObjectTypeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 

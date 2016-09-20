@@ -102,7 +102,8 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `nemsta`.`SnmpObjectType` (
   `SnmpObjectTypeId` INT NOT NULL AUTO_INCREMENT,
   `TypeName` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`SnmpObjectTypeId`))
+  PRIMARY KEY (`SnmpObjectTypeId`),
+  UNIQUE(`TypeName`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
