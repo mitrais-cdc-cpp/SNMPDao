@@ -23,8 +23,9 @@ class DBFactory {
 
   /// TODO: doc
   bool insertSNMPValue(const int &networkElementId, const std::string &OID,
-                       const std::string &value, const std::string &typeName) {
-    return dao.insertSNMPValue(networkElementId, OID, value, typeName);
+                       const std::string &value, const std::string &typeName,
+                       const std::string &note) {
+    return dao.insertSNMPValue(networkElementId, OID, value, typeName, note);
   }
   /// TODO: doc
   long insertNetworkElement(const std::string &elementName,

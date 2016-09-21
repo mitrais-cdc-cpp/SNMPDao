@@ -57,7 +57,8 @@ class DataAccess {
 
   /// TODO: doc
   long insertSNMPValue(const int &networkElementId, const std::string &OID,
-                       const std::string &value, const std::string &typeName);
+                       const std::string &value, const std::string &typeName,
+                       const std::string &note);
 
   /**
    * Function to get NetworkElement by IP Address

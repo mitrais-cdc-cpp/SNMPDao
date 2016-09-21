@@ -26,7 +26,8 @@ long DB::DataAccess::insertNetworkElement(const std::string& elementName,
 long DB::DataAccess::insertSNMPValue(const int& networkElementId,
                                      const std::string& OID,
                                      const std::string& value,
-                                     const std::string& typeName) {
+                                     const std::string& typeName,
+                                     const std::string& note) {
   long snmpValueId = -1;
   odb::transaction t(_dbConn->begin());
   try {
@@ -36,7 +37,7 @@ long DB::DataAccess::insertSNMPValue(const int& networkElementId,
 
     std::time_t now = std::time(0);
     std::shared_ptr<MonitorHistory> monitorHistory(
-        insertMonitorHistory(now, "Test History"));
+        insertMonitorHistory(now, note));
 
     snmpValueId = insertSnmpObjectValue(value, snmpObject, monitorHistory,
                                         snmpObjectType);
