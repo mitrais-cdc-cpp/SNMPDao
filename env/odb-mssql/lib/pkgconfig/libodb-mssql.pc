@@ -1,0 +1,15 @@
+# file      : libodb-mssql.pc.in
+# copyright : Copyright (c) 2009-2015 Code Synthesis Tools CC
+# license   : ODB NCUEL; see accompanying LICENSE file
+
+prefix=/home/developer/git/middleware/linux/odb-mssql/2.4.0
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libodb-mssql
+Description: Object-relational mapping (ORM) system for C++, Microsoft SQL Server runtime library
+URL: http://www.codesynthesis.com/products/odb/
+Version: 2.4.0
+Libs: -L${libdir} -lodb-mssql
+Cflags: -I${includedir}

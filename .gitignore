@@ -11,3 +11,5 @@
 /doxy/latex/
 /doxy/rtf/
 /inc/odb_gen/
+/.metadata/
+/env/SNMPDao/

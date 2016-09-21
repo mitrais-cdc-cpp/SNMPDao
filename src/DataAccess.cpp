@@ -1,5 +1,4 @@
 #include "../inc/DataAccess.hpp"
-#include <odb/mysql/database.hxx>
 
 DB::DataAccess::DataAccess(std::shared_ptr<odb::database> dbConn)
     : _dbConn(dbConn) {}

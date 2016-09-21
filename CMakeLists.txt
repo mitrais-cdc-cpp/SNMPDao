@@ -1,25 +1,54 @@
 cmake_minimum_required(VERSION 3.1.0 FATAL_ERROR)
-project(SNMPDao VERSION 0.2 LANGUAGES CXX)
 
+# receive argument which the default one is mysql.
+# the supported database: mysql, mssql
+# usage: cmake -Ddatabase=[database] ..
+SET(database "mysql" CACHE STRING "mysql")
+option (database "database" ON)
+
+
+# terminate the process if the supplied database technology is not supported.
+if(NOT (database STREQUAL "mysql" OR database STREQUAL "mssql"))
+	message ("Unsupported database " ${database} ". Process is aborted.")
+	message ("The supported ones are: mysql, mssql.")
+	return()
+endif()
+
+set (COMPILATION_OUTPUT_FILE_NAME "SNMPDao-${database}")
+project(${COMPILATION_OUTPUT_FILE_NAME} VERSION 0.2 LANGUAGES CXX)
 set(_ECLIPSE_VERSION "4.5")
 
+
+
+
+###############################################################################
+## preparation which are applicable to all databases ##########################
+###############################################################################
 # Include odb cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules")
 
-#TODO: set ODB path
-find_package(ODB REQUIRED COMPONENTS mysql)
+find_package(ODB REQUIRED COMPONENTS ${database})
 include(${ODB_USE_FILE})
 
-###############################################################################
-## file globbing ##############################################################
-###############################################################################
 
 #tell odb where to find included from generated headers
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/Entity)
 
-set(SNMPDao_SOURCES
-	src/DataAccess.cpp
-	src/MySQLFactory.cpp)
+
+# file globbing
+if(database STREQUAL "mysql")
+	set(SNMPDao_SOURCES
+		src/DataAccess.cpp
+		src/MySQLFactory.cpp)
+		
+elseif(database STREQUAL "mssql")
+	set(SNMPDao_SOURCES
+		src/DataAccess.cpp
+		src/MsSQLFactory.cpp)
+endif()
+
+	
+
 
 set(SNMPDao_ODB_SOURCES
 	inc/odb_gen/ItemizedObject_odb.cpp
@@ -29,6 +58,7 @@ set(SNMPDao_ODB_SOURCES
 	inc/odb_gen/SnmpObjectType_odb.cpp
 	inc/odb_gen/SnmpObjectValue_odb.cpp)
 	
+	
 set(SNMPDao_ODB_HEADERS
 	inc/Entity/ItemizedObject.hpp
 	inc/Entity/MonitorHistory.hpp
@@ -36,10 +66,11 @@ set(SNMPDao_ODB_HEADERS
 	inc/Entity/SnmpObject.hpp
 	inc/Entity/SnmpObjectType.hpp
 	inc/Entity/SnmpObjectValue.hpp)
-
+	
 
 # Compile the entity to ODB generated file
-odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11 GENERATE_QUERY GENERATE_SESSION)
+odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB ${database} STANDARD c++11 GENERATE_QUERY GENERATE_SESSION)
+
 
 
 ###############################################################################
@@ -49,8 +80,8 @@ odb_compile(SNMPDao_SOURCES FILES ${SNMPDao_ODB_HEADERS} DB mysql STANDARD c++11
 #Set Debug or Release
 set(CMAKE_BUILD_TYPE Debug)
 
-add_library(SNMPDao SHARED ${SNMPDao_SOURCES} ${SNMPDao_ODB_SOURCES})
-target_compile_definitions(SNMPDao PRIVATE LIBODB_MYSQL_INCLUDE_SHORT=1)
+add_library(${COMPILATION_OUTPUT_FILE_NAME} SHARED ${SNMPDao_SOURCES} ${SNMPDao_ODB_SOURCES})
+target_compile_definitions(${COMPILATION_OUTPUT_FILE_NAME} PRIVATE LIBODB_MYSQL_INCLUDE_SHORT=1)
 
 
 ###############################################################################
@@ -58,11 +89,11 @@ target_compile_definitions(SNMPDao PRIVATE LIBODB_MYSQL_INCLUDE_SHORT=1)
 ###############################################################################
 
 #enable c++11 and set it required
-set_property(TARGET SNMPDao PROPERTY CXX_STANDARD 11)
-set_property(TARGET SNMPDao PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET ${COMPILATION_OUTPUT_FILE_NAME} PROPERTY CXX_STANDARD 11)
+set_property(TARGET ${COMPILATION_OUTPUT_FILE_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 
 #set warning level
-set_property(TARGET SNMPDao APPEND_STRING PROPERTY COMPILE_FLAGS "-Wno-deprecated")
+set_property(TARGET ${COMPILATION_OUTPUT_FILE_NAME} APPEND_STRING PROPERTY COMPILE_FLAGS "-Wno-deprecated")
 
 
 ###############################################################################
@@ -78,19 +109,53 @@ add_custom_target (doc ALL
 ## dependencies ###############################################################
 ###############################################################################
 
-#MYSQL
-set(MYSQL_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/lib)  
-set(MYSQL_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/include)  
-find_library(  
-	MYSQL_LIBRARIES  
-	NAMES mysqlclient
-	PATHS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/lib
-	PATH_SUFFIXES "lib"  
-	NO_DEFAULT_PATH)
 
-target_link_libraries(SNMPDao ${ODB_LIBRARIES} ${MYSQL_LIBRARIES})
-target_include_directories(SNMPDao PRIVATE ${ODB_INCLUDE_DIRS} ${ODB_COMPILE_OUTPUT_DIR} ${MYSQL_INCLUDE_DIRS})
-target_compile_definitions(SNMPDao PRIVATE DATABASE_MYSQL)
+
+
+
+if(database STREQUAL "mysql")
+	#MYSQL
+	
+	set(MYSQL_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/lib)  
+	set(MYSQL_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/include)  
+	find_library(  
+		MYSQL_LIBRARIES  
+		NAMES mysqlclient
+		PATHS ${CMAKE_CURRENT_LIST_DIR}/env/mysql-connector/lib
+		PATH_SUFFIXES "lib"  
+		NO_DEFAULT_PATH)
+	
+	target_link_libraries(${COMPILATION_OUTPUT_FILE_NAME} ${ODB_LIBRARIES} ${MYSQL_LIBRARIES})
+	target_include_directories(${COMPILATION_OUTPUT_FILE_NAME} PRIVATE ${ODB_INCLUDE_DIRS} ${ODB_COMPILE_OUTPUT_DIR} ${MYSQL_INCLUDE_DIRS})
+	target_compile_definitions(${COMPILATION_OUTPUT_FILE_NAME} PRIVATE DATABASE_MYSQL)
+	
+
+elseif(database STREQUAL "mssql")
+	#MSSQL
+	
+	set(UNIX_ODBC_LIBRARY_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/unix-odbc/lib)  
+	set(UNIX_ODBC_INCLUDE_DIRS ${CMAKE_CURRENT_LIST_DIR}/env/unix-odbc/include)  
+	find_library(  
+		UNIX_ODBC_LIBRARIES  
+		NAMES odbc
+		PATHS ${CMAKE_CURRENT_LIST_DIR}/env/unix-odbc/lib
+		PATH_SUFFIXES "lib"  
+		NO_DEFAULT_PATH)
+	
+	target_link_libraries(${COMPILATION_OUTPUT_FILE_NAME} ${ODB_LIBRARIES} ${UNIX_ODBC_LIBRARIES})
+	target_include_directories(${COMPILATION_OUTPUT_FILE_NAME} PRIVATE ${ODB_INCLUDE_DIRS} ${ODB_COMPILE_OUTPUT_DIR} ${UNIX_ODBC_INCLUDE_DIRS})
+	target_compile_definitions(${COMPILATION_OUTPUT_FILE_NAME} PRIVATE DATABASE_MSSQL)
+endif()
+
+
+
+
+
+
+
+
+
+
 
 
 ###############################################################################
@@ -108,7 +173,7 @@ endif()
 file(GLOB HEADERS inc/*)
 
 # Install .so file
-INSTALL( FILES "${CMAKE_CURRENT_BINARY_DIR}/libSNMPDao.so"
+INSTALL( FILES "${CMAKE_CURRENT_BINARY_DIR}/lib${COMPILATION_OUTPUT_FILE_NAME}.so"
 	DESTINATION ${INSTALLATION_DIR}
 	PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ WORLD_WRITE)
 
