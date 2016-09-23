@@ -1,6 +1,7 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
 
+#define LIBODB_MYSQL_INCLUDE_SHORT
 
 int main(int argc, char* argv[])
 {

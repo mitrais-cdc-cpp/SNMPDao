@@ -23,179 +23,179 @@
 #define _LARGEFILE_SOURCE 1
 
 /* Libraries */
-#define HAVE_LIBM 1
+/* #undef HAVE_LIBM */
 /* #undef HAVE_LIBNSL */
-#define HAVE_LIBCRYPT 1
+/* #undef HAVE_LIBCRYPT */
 /* #undef HAVE_LIBSOCKET */
-#define HAVE_LIBDL 1
-#define HAVE_LIBRT 1
+/* #undef HAVE_LIBDL */
+/* #undef HAVE_LIBRT */
 /* #undef HAVE_LIBWRAP */
 
 /* Header files */
-#define HAVE_ALLOCA_H 1
-#define HAVE_ARPA_INET_H 1
-#define HAVE_DIRENT_H 1
-#define HAVE_DLFCN_H 1
-#define HAVE_EXECINFO_H 1
-#define HAVE_FPU_CONTROL_H 1
-#define HAVE_GRP_H 1
+/* #undef HAVE_ALLOCA_H */
+/* #undef HAVE_ARPA_INET_H */
+/* #undef HAVE_DIRENT_H */
+/* #undef HAVE_DLFCN_H */
+/* #undef HAVE_EXECINFO_H */
+/* #undef HAVE_FPU_CONTROL_H */
+/* #undef HAVE_GRP_H */
 /* #undef HAVE_IEEEFP_H */
-#define HAVE_LANGINFO_H 1
+/* #undef HAVE_LANGINFO_H */
 #define HAVE_MALLOC_H 1
-#define HAVE_NETINET_IN_H 1
-#define HAVE_POLL_H 1
-#define HAVE_PWD_H 1
-#define HAVE_STRINGS_H 1
-#define HAVE_SYS_CDEFS_H 1
-#define HAVE_SYS_IOCTL_H 1
-#define HAVE_SYS_MMAN_H 1
-#define HAVE_SYS_RESOURCE_H 1
-#define HAVE_SYS_SELECT_H 1
-#define HAVE_SYS_SOCKET_H 1
-#define HAVE_TERM_H 1
-#define HAVE_TERMIOS_H 1
-#define HAVE_TERMIO_H 1
-#define HAVE_UNISTD_H 1
-#define HAVE_SYS_WAIT_H 1
-#define HAVE_SYS_PARAM_H 1
-#define HAVE_FNMATCH_H 1
-#define HAVE_SYS_UN_H 1
+/* #undef HAVE_NETINET_IN_H */
+/* #undef HAVE_POLL_H */
+/* #undef HAVE_PWD_H */
+/* #undef HAVE_STRINGS_H */
+/* #undef HAVE_SYS_CDEFS_H */
+/* #undef HAVE_SYS_IOCTL_H */
+/* #undef HAVE_SYS_MMAN_H */
+/* #undef HAVE_SYS_RESOURCE_H */
+/* #undef HAVE_SYS_SELECT_H */
+/* #undef HAVE_SYS_SOCKET_H */
+/* #undef HAVE_TERM_H */
+/* #undef HAVE_TERMIOS_H */
+/* #undef HAVE_TERMIO_H */
+/* #undef HAVE_UNISTD_H */
+/* #undef HAVE_SYS_WAIT_H */
+/* #undef HAVE_SYS_PARAM_H */
+/* #undef HAVE_FNMATCH_H */
+/* #undef HAVE_SYS_UN_H */
 /* #undef HAVE_VIS_H */
-#define HAVE_SASL_SASL_H 1
+/* #undef HAVE_SASL_SASL_H */
 
 /* Libevent */
 /* #undef HAVE_DEVPOLL */
 /* #undef HAVE_SYS_DEVPOLL_H */
-#define HAVE_SYS_EPOLL_H 1
-#define HAVE_TAILQFOREACH 1
+/* #undef HAVE_SYS_EPOLL_H */
+/* #undef HAVE_TAILQFOREACH */
 
 /* Functions */
-/* #undef HAVE_ALIGNED_MALLOC */
-#define HAVE_BACKTRACE 1
+#define HAVE_ALIGNED_MALLOC 1
+/* #undef HAVE_BACKTRACE */
 /* #undef HAVE_PRINTSTACK */
-#define HAVE_INDEX 1
-#define HAVE_CLOCK_GETTIME 1
-#define HAVE_CUSERID 1
+/* #undef HAVE_INDEX */
+/* #undef HAVE_CLOCK_GETTIME */
+/* #undef HAVE_CUSERID */
 /* #undef HAVE_DIRECTIO */
-#define HAVE_FTRUNCATE 1
+/* #undef HAVE_FTRUNCATE */
 #define HAVE_COMPRESS 1
-#define HAVE_CRYPT 1
-#define HAVE_DLOPEN 1
-#define HAVE_FCHMOD 1
-#define HAVE_FCNTL 1
-#define HAVE_FDATASYNC 1
-#define HAVE_DECL_FDATASYNC 1 
-#define HAVE_FEDISABLEEXCEPT 1
-#define HAVE_FSEEKO 1
-#define HAVE_FSYNC 1
-#define HAVE_GETHOSTBYADDR_R 1
+/* #undef HAVE_CRYPT */
+/* #undef HAVE_DLOPEN */
+/* #undef HAVE_FCHMOD */
+/* #undef HAVE_FCNTL */
+/* #undef HAVE_FDATASYNC */
+/* #undef HAVE_DECL_FDATASYNC */
+/* #undef HAVE_FEDISABLEEXCEPT */
+/* #undef HAVE_FSEEKO */
+/* #undef HAVE_FSYNC */
+/* #undef HAVE_GETHOSTBYADDR_R */
 /* #undef HAVE_GETHRTIME */
-#define HAVE_GETNAMEINFO 1
-#define HAVE_GETPASS 1
+/* #undef HAVE_GETNAMEINFO */
+/* #undef HAVE_GETPASS */
 /* #undef HAVE_GETPASSPHRASE */
-#define HAVE_GETPWNAM 1
-#define HAVE_GETPWUID 1
-#define HAVE_GETRLIMIT 1
-#define HAVE_GETRUSAGE 1
-#define HAVE_INITGROUPS 1
+/* #undef HAVE_GETPWNAM */
+/* #undef HAVE_GETPWUID */
+/* #undef HAVE_GETRLIMIT */
+/* #undef HAVE_GETRUSAGE */
+/* #undef HAVE_INITGROUPS */
 /* #undef HAVE_ISSETUGID */
-#define HAVE_GETUID 1
-#define HAVE_GETEUID 1
-#define HAVE_GETGID 1
-#define HAVE_GETEGID 1
-#define HAVE_LSTAT 1
-#define HAVE_MADVISE 1
+/* #undef HAVE_GETUID */
+/* #undef HAVE_GETEUID */
+/* #undef HAVE_GETGID */
+/* #undef HAVE_GETEGID */
+/* #undef HAVE_LSTAT */
+/* #undef HAVE_MADVISE */
 /* #undef HAVE_MALLOC_INFO */
-#define HAVE_MEMRCHR 1
-#define HAVE_MLOCK 1
-#define HAVE_MLOCKALL 1
-#define HAVE_MMAP64 1
-#define HAVE_POLL 1
-#define HAVE_POSIX_FALLOCATE 1
-#define HAVE_POSIX_MEMALIGN 1
-#define HAVE_PREAD 1
-#define HAVE_PTHREAD_CONDATTR_SETCLOCK 1
-#define HAVE_PTHREAD_SIGMASK 1
-#define HAVE_READDIR_R 1
-#define HAVE_READLINK 1
-#define HAVE_REALPATH 1
+/* #undef HAVE_MEMRCHR */
+/* #undef HAVE_MLOCK */
+/* #undef HAVE_MLOCKALL */
+/* #undef HAVE_MMAP64 */
+/* #undef HAVE_POLL */
+/* #undef HAVE_POSIX_FALLOCATE */
+/* #undef HAVE_POSIX_MEMALIGN */
+/* #undef HAVE_PREAD */
+/* #undef HAVE_PTHREAD_CONDATTR_SETCLOCK */
+/* #undef HAVE_PTHREAD_SIGMASK */
+/* #undef HAVE_READDIR_R */
+/* #undef HAVE_READLINK */
+/* #undef HAVE_REALPATH */
 /* #undef HAVE_SETFD */
-#define HAVE_SIGACTION 1
-#define HAVE_SLEEP 1
-#define HAVE_STPCPY 1
-#define HAVE_STPNCPY 1
+/* #undef HAVE_SIGACTION */
+/* #undef HAVE_SLEEP */
+/* #undef HAVE_STPCPY */
+/* #undef HAVE_STPNCPY */
 /* #undef HAVE_STRLCPY */
 #define HAVE_STRNLEN 1
 /* #undef HAVE_STRLCAT */
-#define HAVE_STRSIGNAL 1
+/* #undef HAVE_STRSIGNAL */
 /* #undef HAVE_FGETLN */
-#define HAVE_STRSEP 1
-/* #undef HAVE_TELL */
-#define HAVE_VASPRINTF 1
-#define HAVE_MEMALIGN 1
-#define HAVE_NL_LANGINFO 1
+/* #undef HAVE_STRSEP */
+#define HAVE_TELL 1
+/* #undef HAVE_VASPRINTF */
+/* #undef HAVE_MEMALIGN */
+/* #undef HAVE_NL_LANGINFO */
 /* #undef HAVE_HTONLL */
-#define DNS_USE_CPU_CLOCK_FOR_ID 1
-#define HAVE_EPOLL 1
+/* #undef DNS_USE_CPU_CLOCK_FOR_ID */
+/* #undef HAVE_EPOLL */
 /* #undef HAVE_EVENT_PORTS */
-#define HAVE_INET_NTOP 1
+/* #undef HAVE_INET_NTOP */
 /* #undef HAVE_WORKING_KQUEUE */
-#define HAVE_TIMERADD 1
-#define HAVE_TIMERCLEAR 1
-#define HAVE_TIMERCMP 1
-#define HAVE_TIMERISSET 1
+/* #undef HAVE_TIMERADD */
+/* #undef HAVE_TIMERCLEAR */
+/* #undef HAVE_TIMERCMP */
+/* #undef HAVE_TIMERISSET */
 
 /* WL2373 */
-#define HAVE_SYS_TIME_H 1
-#define HAVE_SYS_TIMES_H 1
-#define HAVE_TIMES 1
-#define HAVE_GETTIMEOFDAY 1
+/* #undef HAVE_SYS_TIME_H */
+/* #undef HAVE_SYS_TIMES_H */
+/* #undef HAVE_TIMES */
+/* #undef HAVE_GETTIMEOFDAY */
 
 /* Symbols */
-#define HAVE_LRAND48 1
-#define GWINSZ_IN_SYS_IOCTL 1
-#define FIONREAD_IN_SYS_IOCTL 1
+/* #undef HAVE_LRAND48 */
+/* #undef GWINSZ_IN_SYS_IOCTL */
+/* #undef FIONREAD_IN_SYS_IOCTL */
 /* #undef FIONREAD_IN_SYS_FILIO */
-#define HAVE_SIGEV_THREAD_ID 1
+/* #undef HAVE_SIGEV_THREAD_ID */
 /* #undef HAVE_SIGEV_PORT */
 /* #undef HAVE_LOG2 */
 
-#define HAVE_ISINF 1
+/* #undef HAVE_ISINF */
 
 /* #undef HAVE_KQUEUE_TIMERS */
-#define HAVE_POSIX_TIMERS 1
-/* #undef HAVE_WINDOWS_TIMERS */
+/* #undef HAVE_POSIX_TIMERS */
+#define HAVE_WINDOWS_TIMERS 1
 #define HAVE_MY_TIMER 1
 
 /* Endianess */
 /* #undef WORDS_BIGENDIAN */
 
 /* Type sizes */
-#define SIZEOF_VOIDP     8
-#define SIZEOF_CHARP     8
-#define SIZEOF_LONG      8
+#define SIZEOF_VOIDP     4
+#define SIZEOF_CHARP     4
+#define SIZEOF_LONG      4
 #define SIZEOF_SHORT     2
 #define SIZEOF_INT       4
 #define SIZEOF_LONG_LONG 8
-#define SIZEOF_OFF_T     8
+#define SIZEOF_OFF_T     4
 #define SIZEOF_TIME_T    8
-#define HAVE_UINT 1
-#define HAVE_ULONG 1
-#define HAVE_U_INT32_T 1
+/* #undef HAVE_UINT */
+/* #undef HAVE_ULONG */
+/* #undef HAVE_U_INT32_T */
 
 /* Code tests*/
 #define STACK_DIRECTION -1
-#define TIME_WITH_SYS_TIME 1
-/* #undef NO_FCNTL_NONBLOCK */
-#define HAVE_PAUSE_INSTRUCTION 1
+/* #undef TIME_WITH_SYS_TIME */
+#define NO_FCNTL_NONBLOCK 1
+/* #undef HAVE_PAUSE_INSTRUCTION */
 /* #undef HAVE_FAKE_PAUSE_INSTRUCTION */
 /* #undef HAVE_HMT_PRIORITY_INSTRUCTION */
 /* #undef HAVE_ABI_CXA_DEMANGLE */
-#define HAVE_BSS_START 1
-#define HAVE_BUILTIN_UNREACHABLE 1
-#define HAVE_BUILTIN_EXPECT 1
-#define HAVE_BUILTIN_STPCPY 1
-#define HAVE_GCC_ATOMIC_BUILTINS 1
+/* #undef HAVE_BSS_START */
+/* #undef HAVE_BUILTIN_UNREACHABLE */
+/* #undef HAVE_BUILTIN_EXPECT */
+/* #undef HAVE_BUILTIN_STPCPY */
+/* #undef HAVE_GCC_ATOMIC_BUILTINS */
 /* #undef HAVE_VALGRIND */
 
 /* IPV6 */
@@ -211,17 +211,17 @@
 /*
  * Platform specific CMake files
  */
-#define MACHINE_TYPE "x86_64"
-#define HAVE_LINUX_LARGE_PAGES 1
+#define MACHINE_TYPE "x86"
+/* #undef HAVE_LINUX_LARGE_PAGES */
 /* #undef HAVE_SOLARIS_LARGE_PAGES */
 /* #undef HAVE_SOLARIS_ATOMIC */
 /* #undef HAVE_SOLARIS_STYLE_GETHOST */
-#define SYSTEM_TYPE "linux-glibc2.5"
+#define SYSTEM_TYPE "Win32"
 /* Windows stuff, mostly functions, that have Posix analogs but named differently */
 /* #undef IPPROTO_IPV6 */
 /* #undef IPV6_V6ONLY */
 /* This should mean case insensitive file system */
-/* #undef FN_NO_CASE_SENSE */
+#define FN_NO_CASE_SENSE 1
 
 /*
  * From main CMakeLists.txt
@@ -234,31 +234,31 @@
 /* #undef HAVE_ASAN */
 #define ENABLED_LOCAL_INFILE 1
 /* #undef OPTIMIZER_TRACE */
-#define DEFAULT_MYSQL_HOME "/usr/local/mysql"
-#define SHAREDIR "/usr/local/mysql/share"
-#define DEFAULT_BASEDIR "/usr/local/mysql"
-#define MYSQL_DATADIR "/usr/local/mysql/data"
-#define DEFAULT_CHARSET_HOME "/usr/local/mysql"
-#define PLUGINDIR "/usr/local/mysql/lib/plugin"
-#define DEFAULT_SYSCONFDIR "/usr/local/mysql/etc"
+#define DEFAULT_MYSQL_HOME "C:/Program Files/MySQL/MySQL Server 6.1"
+#define SHAREDIR "share"
+#define DEFAULT_BASEDIR "C:/Program Files/MySQL/MySQL Server 6.1"
+#define MYSQL_DATADIR "C:/Program Files/MySQL/MySQL Server 6.1/data"
+#define DEFAULT_CHARSET_HOME "C:/Program Files/MySQL/MySQL Server 6.1"
+#define PLUGINDIR "C:/Program Files/MySQL/MySQL Server 6.1/lib/plugin"
+/* #undef DEFAULT_SYSCONFDIR */
 #define DEFAULT_TMPDIR P_tmpdir
-#define INSTALL_SBINDIR "/usr/local/mysql/bin"
-#define INSTALL_BINDIR "/usr/local/mysql/bin"
-#define INSTALL_MYSQLSHAREDIR "/usr/local/mysql/share"
-#define INSTALL_SHAREDIR "/usr/local/mysql/share"
-#define INSTALL_PLUGINDIR "/usr/local/mysql/lib/plugin"
-#define INSTALL_INCLUDEDIR "/usr/local/mysql/include"
-#define INSTALL_SCRIPTDIR "/usr/local/mysql/scripts"
-#define INSTALL_MYSQLDATADIR "/usr/local/mysql/data"
+#define INSTALL_SBINDIR "/bin"
+#define INSTALL_BINDIR "/bin"
+#define INSTALL_MYSQLSHAREDIR "/share"
+#define INSTALL_SHAREDIR "/share"
+#define INSTALL_PLUGINDIR "/lib/plugin"
+#define INSTALL_INCLUDEDIR "/include"
+#define INSTALL_SCRIPTDIR "/scripts"
+#define INSTALL_MYSQLDATADIR "/data"
 /* #undef INSTALL_PLUGINTESTDIR */
-#define INSTALL_INFODIR "/usr/local/mysql/docs"
-#define INSTALL_MYSQLTESTDIR "/usr/local/mysql/mysql-test"
-#define INSTALL_SQLBENCHDIR "/usr/local/mysql/."
-#define INSTALL_DOCREADMEDIR "/usr/local/mysql/."
-#define INSTALL_DOCDIR "/usr/local/mysql/docs"
-#define INSTALL_MANDIR "/usr/local/mysql/man"
-#define INSTALL_SUPPORTFILESDIR "/usr/local/mysql/support-files"
-#define INSTALL_LIBDIR "/usr/local/mysql/lib"
+#define INSTALL_INFODIR "/docs"
+#define INSTALL_MYSQLTESTDIR "/mysql-test"
+#define INSTALL_SQLBENCHDIR "/."
+#define INSTALL_DOCREADMEDIR "/."
+#define INSTALL_DOCDIR "/docs"
+#define INSTALL_MANDIR "/man"
+#define INSTALL_SUPPORTFILESDIR "/support-files"
+#define INSTALL_LIBDIR "/lib"
 
 /*
  * Readline
@@ -365,7 +365,7 @@
   keyword whenever needing to access a type inside a template, but msvc
   forbids it.
  */
-/* #undef HAVE_IMPLICIT_DEPENDENT_NAME_TYPING */
+#define HAVE_IMPLICIT_DEPENDENT_NAME_TYPING 1
 
 
 /*
@@ -389,7 +389,6 @@
  * CPU info
  */
 #define CPU_LEVEL1_DCACHE_LINESIZE 64
-
 
 /*
  * NDB

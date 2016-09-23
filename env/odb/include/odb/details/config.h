@@ -12,7 +12,7 @@
 /* #undef ODB_THREADS_NONE */
 #define ODB_THREADS_POSIX 1
 /* #undef ODB_THREADS_WIN32 */
-#define ODB_THREADS_TLS_KEYWORD 1
+/* #undef ODB_THREADS_TLS_KEYWORD */
 /* #undef ODB_THREADS_TLS_DECLSPEC */
 
 /* #undef LIBODB_STATIC_LIB */
