@@ -23,11 +23,16 @@ Note: to use mssql database:
 Important: if you specified any unsupported database, the compilation will be terminated.
 
 ### How to run the test:
+When the SNMPDao was compiled for mysql:
 1. from root directory, go to folder "test" then create "build" folder
 2. switch directory to build with $ cd build
-3. run cmake with $ cmake ..
+3. run cmake with $ cmake .. OR cmake -Ddatabase=mysql ..
 4. run make with $ make
-5. run the test with $ ./SNMPDao_Test
+5. run the test with $ ./ TestSuite_SNMPDao-mysql
 
-
-
+When the SNMPDao was compiled for mssql:
+1. from root directory, go to folder "test" then create "build" folder
+2. switch directory to build with $ cd build
+3. run cmake with $ cmake -Ddatabase=mssql ..
+4. run make with $ make
+5. run the test with $ ./ TestSuite_SNMPDao-mssql

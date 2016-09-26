@@ -38,13 +38,19 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc/Entity)
 # file globbing
 if(database STREQUAL "mysql")
 	set(SNMPDao_SOURCES
+		inc/DataAccess.hpp
+		inc/MySQLFactory.hpp
 		src/DataAccess.cpp
-		src/MySQLFactory.cpp)
+		src/MySQLFactory.cpp
+		)
 		
 elseif(database STREQUAL "mssql")
 	set(SNMPDao_SOURCES
+		inc/DataAccess.hpp
+		inc/MicrosoftSQLFactory.hpp
 		src/DataAccess.cpp
-		src/MsSQLFactory.cpp)
+		src/MicrosoftSQLFactory.cpp
+		)
 endif()
 
 	
