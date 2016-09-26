@@ -1,5 +1,5 @@
-#ifndef INC_MYSQLFACTORY_HPP_
-#define INC_MYSQLFACTORY_HPP_
+#ifndef INC_MSSQLFACTORY_HPP_
+#define INC_MSSQLFACTORY_HPP_
 
 #include <memory>
 #include <string>
@@ -7,9 +7,9 @@
 
 namespace DB {
 /**
- * MySQL Database factory
+ * MicrosoftSQL Database factory
  */
-class MySQLFactory : public DBFactory {
+class MicrosoftSQLFactory : public DBFactory {
  public:
   /**
    * Default constructor
@@ -18,11 +18,11 @@ class MySQLFactory : public DBFactory {
    * @param dbName: Database name
    * @param host: Database host
    */
-  MySQLFactory(std::string username_, std::string password_,
-               std::string dbname_, std::string host_);
+	MicrosoftSQLFactory(std::string &username_, std::string &password_,
+               std::string &dbname_, std::string &host_);
 
   /// Default dtor
-  ~MySQLFactory();
+  ~MicrosoftSQLFactory();
 
   /**
    * Function to create database
@@ -42,4 +42,4 @@ class MySQLFactory : public DBFactory {
 };
 }
 
-#endif /* INC_MYSQLFACTORY_HPP_ */
+#endif /* INC_MSSQLFACTORY_HPP_ */

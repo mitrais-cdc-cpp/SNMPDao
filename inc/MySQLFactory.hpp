@@ -24,6 +24,12 @@ class MySQLFactory : public DBFactory {
   /// Default dtor
   ~MySQLFactory();
 
+  /**
+   * Function to create database
+   * @return database pointer
+   */
+  std::unique_ptr<odb::database> createDatabase();
+
  private:
   /// Database username
   std::string username;
